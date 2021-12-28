@@ -1,0 +1,17 @@
+app-id: hr.from.josipantolis.sage
+runtime: io.elementary.Platform
+runtime-version: '6.1'
+sdk: io.elementary.Sdk
+command: hr.from.josipantolis.sage
+
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+
+modules:
+  - name: sage
+    buildsystem: meson
+    sources:
+      - type: dir
+        path: .

@@ -1,0 +1,9 @@
+src/Application.vala
+src/Board.vala
+src/Colors.vala
+src/EndDialog.vala
+src/Game.vala
+src/Hint.vala
+src/MainWindow.vala
+data/sage.appdata.xml.in
+data/sage.desktop.in

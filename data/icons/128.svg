@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="linearGradient2416" x1="16.669" x2="16.669" y1="8.4667" y2="25.4" gradientTransform="translate(2.4778e-8 -.13229)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f6f6f6" offset="0"/>
+      <stop stop-color="#e6e6e6" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient10337" x1="16.653" x2="16.653" y1="8.4948" y2="25.458" gradientTransform="matrix(1.0166 0 0 1.0303 -.28114 -.51326)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".80087" offset="0"/>
+      <stop stop-color="#fff" stop-opacity="0" offset=".35335"/>
+      <stop stop-color="#fff" stop-opacity=".0021838" offset=".81865"/>
+      <stop stop-color="#fff" stop-opacity=".59913" offset="1"/>
+    </linearGradient>
+    <filter id="filter15421" x="-.038436" y="-.070866" width="1.0769" height="1.1417" color-interpolation-filters="sRGB">
+      <feGaussianBlur result="blur" stdDeviation="0.5 0.5"/>
+    </filter>
+    <radialGradient id="radialGradient24024" cx="9.2604" cy="16.933" r="6.6146" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".32" offset="0"/>
+      <stop stop-color="#fff" stop-opacity=".0039216" offset="1"/>
+    </radialGradient>
+    <radialGradient id="radialGradient24848" cx="24.606" cy="16.933" r="6.6146" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".32" offset="0"/>
+      <stop stop-color="#fff" stop-opacity="0" offset="1"/>
+    </radialGradient>
+    <linearGradient id="linearGradient25132" x1="9.5541" x2="9.5541" y1="10.045" y2="23.583" gradientUnits="userSpaceOnUse">
+      <stop stop-opacity=".07" offset="0"/>
+      <stop stop-opacity=".0035241" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient25672" x1="24.975" x2="24.975" y1="10.175" y2="23.592" gradientUnits="userSpaceOnUse">
+      <stop stop-opacity=".07" offset="0"/>
+      <stop stop-opacity=".0005349" offset="1"/>
+    </linearGradient>
+  </defs>
+  <rect x="1.3073" y="9.5376" width="31.221" height="16.933" rx="8.4667" ry="8.4667" fill-rule="evenodd" filter="url(#filter15421)" opacity=".35012"/>
+  <g>
+    <rect x="1.3229" y="8.3344" width="31.221" height="16.933" rx="8.4667" ry="8.4667" fill="url(#linearGradient2416)" fill-rule="evenodd"/>
+    <rect x="1.3229" y="8.4667" width="31.221" height="16.933" rx="8.4667" ry="8.4667" fill="none" stroke="#000" stroke-opacity=".3" stroke-width=".26458"/>
+    <path d="m9.2418 8.7678c-3.6738 0.12251-6.9913 3.1148-7.5278 6.8022-0.6599 3.6011 1.3958 7.4775 4.7445 8.8714 2.261 1.0377 4.7944 0.56273 7.1909 0.67089 3.7863-0.02672 7.5757 0.05354 11.36-0.04025 3.6433-0.30244 6.8061-3.4176 7.1913-7.1049 0.51595-3.6107-1.676-7.3835-5.0572-8.6513-2.2356-0.90652-4.6884-0.44737-7.0286-0.56015-3.6243 0.00811-7.2491-0.016175-10.873 0.012074z" fill="none" stroke="url(#linearGradient10337)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".99703" stroke-width=".26458" style="paint-order:normal"/>
+    <g fill-rule="evenodd">
+      <circle cx="9.2604" cy="17.198" r="6.6146" opacity=".15" stroke-width=".37798"/>
+      <circle cx="9.2604" cy="17.198" r="6.6146" opacity=".07" stroke="#000" stroke-width=".26458"/>
+      <circle cx="9.2604" cy="16.933" r="6.6146" fill="#f9c440" stroke-width=".37798"/>
+    </g>
+    <circle cx="24.606" cy="17.198" r="6.6146" fill-opacity=".15" fill-rule="evenodd" stroke-width=".37798"/>
+    <circle cx="24.606" cy="17.198" r="6.6146" fill-opacity=".07" fill-rule="evenodd" stroke="#aaa" stroke-opacity=".070588" stroke-width=".26458"/>
+    <g fill-rule="evenodd" stroke-width=".37798">
+      <circle cx="24.606" cy="16.933" r="6.6146" fill="#a56de2"/>
+      <circle cx="9.2604" cy="16.933" r="6.6146" fill="url(#radialGradient24024)"/>
+      <circle cx="24.606" cy="16.933" r="6.6146" fill="url(#radialGradient24848)"/>
+    </g>
+    <circle cx="9.2604" cy="16.933" r="6.6146" fill="none" stroke="url(#linearGradient25132)" stroke-width=".26458"/>
+    <circle cx="24.606" cy="16.933" r="6.6146" fill="none" stroke="url(#linearGradient25672)" stroke-width=".26458"/>
+  </g>
+</svg>

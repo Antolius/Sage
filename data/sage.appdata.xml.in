@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>hr.from.josipantolis.sage</id>
+  <name>Sage</name>
+  <summary>Break the code, show your mastery</summary>
+
+  <metadata_license>CC-BY-4.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <description>
+    <p>Guess random combination in as few attepts as possible.</p>
+  </description>
+  <developer_name>Josip Antoliš</developer_name>
+
+  <launchable type="desktop-id">hr.from.josipantolis.sage.desktop</launchable>
+</component>
