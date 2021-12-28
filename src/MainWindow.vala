@@ -24,7 +24,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     public Game game { get; construct; }
 
     private Gtk.Grid grid;
-    private Board board;
+    private Widgets.BoardGrid board;
 
     public MainWindow (Application application) {
         Object (
@@ -71,18 +71,18 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
         grid = new Gtk.Grid ();
         grid.attach (header_bar, 0, 0);
-        board = new Board (game);
+        board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);
         add (grid);
     }
 
     private void listen_to_game_over () {
         game.game_over.connect ((victory, code) => {
-            EndDialog dialog;
+            Widgets.EndGameDialog dialog;
             if (victory) {
-                dialog = new EndDialog ();
+                dialog = new Widgets.EndGameDialog ();
             } else {
-                dialog = new EndDialog.defeat ();
+                dialog = new Widgets.EndGameDialog.defeat ();
             }
 
             dialog.transient_for = this;
@@ -103,7 +103,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
         grid.remove_row (1);
         board.destroy ();
         game.reset ();
-        board = new Board (game);
+        board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);
         grid.show_all ();
     }

@@ -18,30 +18,20 @@
 *
 */
 
-public class Sage.Colors {
+public class Sage.Widgets.ColorPickerButton : Granite.Widgets.ModeButton {
 
-    public const uint32[] CODE = {
-        (uint32) 0xc6262eff, //Strawberry
-        (uint32) 0x68b723ff, //Lime
-        (uint32) 0x3689e6ff, //Blueberry
-        (uint32) 0xf9c440ff, //Banana
-        (uint32) 0xa56de2ff, //Grape
-        (uint32) 0xf37329ff, //Orange
-        (uint32) 0x28bca3ff, //Mint
-        (uint32) 0x715344ff, //Cocoa
-        (uint32) 0xde3e80ff  //Bubblegum
-    };
+    public Game game { get; construct; }
 
-    public const string[] STYLE_CLASS = {
-        "strawberry",
-        "lime",
-        "blueberry",
-        "banana",
-        "grape",
-        "orange",
-        "mint",
-        "cocoa",
-        "bubblegum"
-    };
+    public ColorPickerButton (Game game) {
+        Object (game: game);
+    }
 
+    construct {
+        for (int i = 0; i < game.number_of_colors; i++) {
+            var color = new Gdk.Pixbuf (Gdk.Colorspace.RGB, true, 8, 32, 32);
+            color.fill (Colors.CODE[i]);
+            append_pixbuf (color);
+        }
+    }
 }
+
