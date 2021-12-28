@@ -20,30 +20,16 @@
 
 public class Sage.Board : Gtk.Grid {
 
-    private const int EMPTY_GUESS = -1;
-
     public int current_color { get; set; default = 0; }
-    public bool can_submit_a_guess { get; set; default = false; }
 
     public Game game { get; construct; }
-    public Gee.List<int> current_guess { get; set; }
 
     public Board (Game game) {
         Object (
             margin: 12,
             row_spacing: 12,
-            game: game,
-            current_guess: empty_guesses (game.code_length)
+            game: game
         );
-    }
-
-    private static Gee.List<int> empty_guesses (int size) {
-        var guesses = new Gee.ArrayList<int> ();
-        for (int i = 0; i < size; i++) {
-            guesses.add (EMPTY_GUESS);
-        }
-
-        return guesses;
     }
 
     construct {
@@ -61,18 +47,10 @@ public class Sage.Board : Gtk.Grid {
             column_spacing = 8,
         };
 
-        game.notify.connect (() => {
-            var ctx = row.get_style_context ();
-            if (game.current_turn == row_num) {
-                ctx.add_class (Granite.STYLE_CLASS_CARD);
-            } else {
-                ctx.remove_class (Granite.STYLE_CLASS_CARD);
-            }
+        update_row_class (row, row_num);
+        game.notify["current-turn"].connect (() => {
+            update_row_class (row, row_num);
         });
-
-        if (game.current_turn == row_num) {
-            row.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        }
 
         row.get_style_context ().add_class ("circular");
 
@@ -83,12 +61,20 @@ public class Sage.Board : Gtk.Grid {
 
         var separator = new Gtk.Separator (Gtk.Orientation.VERTICAL);
         row.attach (separator, game.code_length, 0);
-        Gtk.Image[] hint_icons;
-        var hints_grid = create_hints_grid (out hint_icons);
+        var hints_grid = create_hints_grid (row_num);
         row.attach (hints_grid, game.code_length + 1, 0);
-        var submit = create_submit_button (row_num, hint_icons);
-        row.attach (submit, game.code_length + 2, 0);
+        var validate_btn = create_validate_button (row_num);
+        row.attach (validate_btn, game.code_length + 2, 0);
         return row;
+    }
+
+    private void update_row_class (Gtk.Grid row, int row_num) {
+        var ctx = row.get_style_context ();
+        if (game.current_turn == row_num) {
+            ctx.add_class (Granite.STYLE_CLASS_CARD);
+        } else {
+            ctx.remove_class (Granite.STYLE_CLASS_CARD);
+        }
     }
 
     private Gtk.ToggleButton create_guess_toggle (int row_num, int idx) {
@@ -101,16 +87,56 @@ public class Sage.Board : Gtk.Grid {
             sensitive = row_num == game.current_turn,
         };
 
-        game.notify.connect (() => {
+        game.notify["current-turn"].connect (() => {
             btn.sensitive = row_num == game.current_turn;
         });
 
-        btn.toggled.connect (() => make_a_guess (btn, idx));
+        update_guess_button (row_num, idx, btn);
+        game.notify["guesses"].connect (() => {
+            update_guess_button (row_num, idx, btn);
+        });
+
+        btn.toggled.connect (() => {
+            var game_state = game.guesses[row_num][idx];
+            if (btn.active && game_state == Game.EMPTY_GUESS) {
+                game.submit_a_guess (idx, current_color);
+            } else if (!btn.active && game_state != Game.EMPTY_GUESS) {
+                game.submit_a_guess (idx, Game.EMPTY_GUESS);
+            }
+        });
+
         btn.get_style_context ().add_class ("circular");
         return btn;
     }
 
-    private Gtk.Grid create_hints_grid (out Gtk.Image[] icons) {
+    private void update_guess_button (
+        int row_num,
+        int idx,
+        Gtk.ToggleButton btn
+    ) {
+        var guess = game.guesses[row_num][idx];
+        if (guess == Game.EMPTY_GUESS) {
+            btn.active = false;
+            clear_color_class (btn);
+        } else {
+            btn.active = true;
+            set_color_class (btn, guess);
+        }
+    }
+
+    private void clear_color_class (Gtk.ToggleButton btn) {
+        var ctx = btn.get_style_context ();
+        foreach (string color_class in Colors.STYLE_CLASS) {
+            ctx.remove_class (color_class);
+        }
+    }
+
+    private void set_color_class (Gtk.ToggleButton btn, int color_idx) {
+        var color_class = Colors.STYLE_CLASS[color_idx];
+        btn.get_style_context ().add_class (color_class);
+    }
+
+    private Gtk.Grid create_hints_grid (int row_num) {
         var grid = new Gtk.Grid () {
             row_spacing = 0,
             column_spacing = 0,
@@ -118,7 +144,7 @@ public class Sage.Board : Gtk.Grid {
             margin_bottom = 2,
         };
 
-        icons = new Gtk.Image[game.code_length];
+        var icons = new Gtk.Image[game.code_length];
         for (int i = 0; i < game.code_length; i++) {
             icons[i] = new Gtk.Image () {
                 gicon = new ThemedIcon ("emblem-disabled"),
@@ -129,11 +155,31 @@ public class Sage.Board : Gtk.Grid {
             grid.attach (icons[i], i / 2, i % 2);
         }
 
+        update_hint_icons (row_num, icons);
+        game.notify["hints"].connect (() => {
+            update_hint_icons (row_num, icons);
+        });
+
         return grid;
     }
 
-    private Gtk.Button create_submit_button (int row_num, owned Gtk.Image[] hints) {
-        var submit = new Gtk.Button.from_icon_name (
+    private void update_hint_icons (int row_num, Gtk.Image[] icons) {
+        var hint = game.hints[row_num];
+        for (int i = 0; i < hint.correct_colors_count; i++) {
+            if (i < hint.correct_positions_count) {
+                icons[i].gicon = new ThemedIcon ("emblem-enabled");
+                icons[i].tooltip_text = _("Correct color on a correct position");
+            } else {
+                icons[i].gicon = new ThemedIcon ("emblem-mixed");
+                icons[i].tooltip_text = _("Correct color on a wrong position");
+            }
+
+            icons[i].show_all ();
+        }
+    }
+
+    private Gtk.Button create_validate_button (int row_num) {
+        var btn = new Gtk.Button.from_icon_name (
             "emblem-readonly",
             Gtk.IconSize.LARGE_TOOLBAR
         ) {
@@ -143,56 +189,19 @@ public class Sage.Board : Gtk.Grid {
             sensitive = false,
         };
 
-        submit.clicked.connect (() => {
-            var hint = game.submit_a_guess (current_guess.to_array ());
-            can_submit_a_guess = false;
-            current_guess = empty_guesses (game.code_length);
-            for (int i = 0; i < hint.correct_colors_count; i++) {
-                if (i < hint.correct_positions_count) {
-                    hints[i].gicon = new ThemedIcon ("emblem-enabled");
-                    hints[i].tooltip_text = _("Correct color on a correct position");
-                } else {
-                    hints[i].gicon = new ThemedIcon ("emblem-mixed");
-                    hints[i].tooltip_text = _("Correct color on a wrong position");
-                }
-
-                hints[i].show_all ();
-            }
+        btn.clicked.connect (() => game.validate_current_row ());
+        update_validate_button (row_num, btn);
+        game.notify["can-validate"].connect (() => {
+            update_validate_button (row_num, btn);
         });
 
-        bind_property (
-            "can_submit_a_guess",
-            submit,
-            "sensitive",
-            BindingFlags.DEFAULT,
-            (b, f, ref to_val) => {
-                to_val = can_submit_a_guess && game.current_turn == row_num;
-                return true;
-            }
-        );
-
-        submit.get_style_context ().add_class ("circular");
-        return submit;
+        btn.get_style_context ().add_class ("circular");
+        return btn;
     }
 
-    private void make_a_guess (Gtk.ToggleButton guessed_btn, int idx) {
-        if (!guessed_btn.active) {
-            current_guess[idx] = EMPTY_GUESS;
-            foreach (string color_class in Colors.STYLE_CLASS) {
-                guessed_btn.get_style_context ().remove_class (color_class);
-            }
-        } else {
-            current_guess[idx] = current_color;
-            var color_class = Colors.STYLE_CLASS[current_color];
-            guessed_btn.get_style_context ().add_class (color_class);
-        }
-
-        var guess_is_full = true;
-        foreach (var guess in current_guess) {
-            guess_is_full = guess_is_full && guess != EMPTY_GUESS;
-        }
-
-        can_submit_a_guess = guess_is_full;
+    private void update_validate_button (int row_num, Gtk.Button btn) {
+        var is_on_turn = row_num == game.current_turn;
+        btn.sensitive = is_on_turn && game.can_validate;
     }
 
     private Gtk.Widget create_color_picker () {
