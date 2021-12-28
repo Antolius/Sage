@@ -25,6 +25,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
     private Gtk.Grid grid;
     private Widgets.BoardGrid board;
+    private uint configure_id;
 
     public MainWindow (Application application) {
         Object (
@@ -55,9 +56,35 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     }
 
     construct {
+        link_position_to_state ();
         create_layout ();
         listen_to_game_over ();
         show_all ();
+    }
+
+    private void link_position_to_state () {
+        int window_x, window_y;
+        app.state.get ("window-position", "(ii)", out window_x, out window_y);
+        if (window_x != -1 || window_y != -1) {
+            move (window_x, window_y);
+        }
+    }
+
+    public override bool configure_event (Gdk.EventConfigure event) {
+        if (configure_id != 0) {
+            GLib.Source.remove (configure_id);
+        }
+
+        configure_id = Timeout.add (100, () => {
+            configure_id = 0;
+            int window_x, window_y;
+            get_position (out window_x, out window_y);
+            app.state.set ("window-position", "(ii)", window_x, window_y);
+
+            return false;
+        });
+
+        return base.configure_event (event);
     }
 
     private void create_layout () {
