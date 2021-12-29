@@ -23,6 +23,8 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
     public Game game { get; construct; }
     public int row { get; construct; }
 
+    private Gtk.Image[] icons;
+
     public HintsGrid (Game game, int row) {
         Object (
             game: game,
@@ -36,7 +38,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         margin_top = 2;
         margin_bottom = 2;
 
-        var icons = new Gtk.Image[game.code_length];
+        icons = new Gtk.Image[game.code_length];
         for (int i = 0; i < game.code_length; i++) {
             icons[i] = new Gtk.Image () {
                 gicon = new ThemedIcon ("emblem-disabled"),
@@ -47,13 +49,11 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
             attach (icons[i], i / 2, i % 2);
         }
 
-        update_hint_icons (icons);
-        game.notify["hints"].connect (() => {
-            update_hint_icons (icons);
-        });
+        update_hint_icons ();
+        game.notify["hints"].connect (update_hint_icons);
     }
 
-    private void update_hint_icons (Gtk.Image[] icons) {
+    private void update_hint_icons () {
         var hint = game.hints[row];
         for (int i = 0; i < game.code_length; i++) {
             if (i < hint.correct_positions_count) {

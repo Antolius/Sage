@@ -30,13 +30,44 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
     }
 
     construct {
-        title = _("Sage");
         has_subtitle = false;
         show_close_button = true;
         decoration_layout = "close";
-
+        custom_title = create_mode_switcher ();
         var new_game = create_new_game_button ();
         pack_start (new_game);
+    }
+
+    private Granite.Widgets.ModeButton create_mode_switcher () {
+        var btn = new Granite.Widgets.ModeButton ();
+        btn.append_text (_("Classic"));
+        btn.append_text (_("Advanced"));
+        btn.selected = determine_mode_from_game ();
+        btn.mode_changed.connect (() => {
+            switch_mode_to (btn.selected);
+        });
+
+        return btn;
+    }
+
+    private int determine_mode_from_game () {
+        if (game.code_length == 4 && game.number_of_colors == 6) {
+            return 0;
+        }
+
+        return 1;
+    }
+
+    private void switch_mode_to (int mode) {
+        if (mode == 0) {
+            game.code_length = 4;
+            game.number_of_colors = 6;
+        } else {
+            game.code_length = 5;
+            game.number_of_colors = 8;
+        }
+
+        on_new_game ();
     }
 
     private Gtk.Button create_new_game_button () {

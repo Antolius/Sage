@@ -46,9 +46,7 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
 
         clicked.connect (() => game.validate_current_row ());
         update_validate_button ();
-        game.notify["can-validate"].connect (() => {
-            update_validate_button ();
-        });
+        game.notify["can-validate"].connect (update_validate_button);
     }
 
     public override void show_all () {

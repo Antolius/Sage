@@ -35,10 +35,7 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
         column_spacing = 8;
 
         update_row_class ();
-        game.notify["current-turn"].connect (() => {
-            update_row_class ();
-        });
-
+        game.notify["current-turn"].connect (update_row_class);
         get_style_context ().add_class ("circular");
 
         for (int i = 0; i < game.code_length; i++) {
