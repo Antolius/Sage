@@ -6,5 +6,45 @@
       <summary>Window position</summary>
       <description>Most recent window position (x, y)</description>
     </key>
+    <key name="max-guesses" type="i">
+      <default>10</default>
+      <summary>Maximum number of guesses</summary>
+      <description>Player has to guess the code in this many steps</description>
+    </key>
+    <key name="code-length" type="i">
+      <default>4</default>
+      <summary>Code length</summary>
+      <description>Code has this many colored pips</description>
+    </key>
+    <key name="number-of-colors" type="i">
+      <default>6</default>
+      <summary>Number of colors</summary>
+      <description>Number of colors that code pips can have</description>
+    </key>
+    <key name="current-turn" type="i">
+      <default>0</default>
+      <summary>Current turn</summary>
+      <description>Current turn of the game</description>
+    </key>
+    <key name="code" type="ai">
+      <default>[]</default>
+      <summary>Code</summary>
+      <description>Current random code that player has to guess</description>
+    </key>
+    <key name="hints" type="a(ii)">
+      <default>[]</default>
+      <summary>Hints</summary>
+      <description>Hints offered to the player on previous turns</description>
+    </key>
+    <key name="guesses" type="aai">
+      <default>[]</default>
+      <summary>Guesses</summary>
+      <description>Guesses submitted by the player so far</description>
+    </key>
+    <key name="can-validate" type="b">
+      <default>false</default>
+      <summary>Can validate</summary>
+      <description>Can the player submit current row to validation</description>
+    </key>
   </schema>
 </schemalist>

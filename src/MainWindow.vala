@@ -30,7 +30,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     public MainWindow (Application application) {
         Object (
             app: application,
-            game: new Game (),
+            game: new Game (application.state),
             application: application,
             height_request: 640,
             width_request: 420,
@@ -119,6 +119,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             if (response_id == Gtk.ResponseType.ACCEPT) {
                 reset_game ();
             } else {
+                game.reset ();
                 application.quit ();
             }
 
