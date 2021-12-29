@@ -24,6 +24,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
     public int row { get; construct; }
 
     private Gtk.Image[] icons;
+    private Gtk.Popover? help_popover;
 
     public HintsGrid (Game game, int row) {
         Object (
@@ -51,6 +52,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
         update_hint_icons ();
         game.notify["hints"].connect (update_hint_icons);
+        game.notify["help-tour-step"].connect (update_help_popover);
     }
 
     private void update_hint_icons () {
@@ -81,6 +83,23 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
     private void mark_as_a_miss (Gtk.Image icon) {
         icon.gicon = new ThemedIcon ("emblem-disabled");
         icon.tooltip_text = null;
+    }
+
+    private void update_help_popover () {
+        var on_next_turn = game.current_turn - 1 == row;
+        var hint_help = game.help_tour_step == Game.HINT_HELP;
+        if (on_next_turn && hint_help) {
+            if (help_popover == null) {
+                help_popover = new HelpPopover (this, Game.HINT_HELP);
+                help_popover.show_all ();
+            }
+
+            help_popover.popup ();
+        } else if (help_popover != null) {
+            help_popover.popdown ();
+            help_popover.destroy ();
+            help_popover = null;
+        }
     }
 }
 

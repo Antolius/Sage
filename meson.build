@@ -24,6 +24,7 @@ executable(
     'src' / 'Widgets' / 'GuessRow.vala',
     'src' / 'Widgets' / 'GuessToggle.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
+    'src' / 'Widgets' / 'HelpPopover.vala',
     'src' / 'Widgets' / 'HintsGrid.vala',
     'src' / 'Widgets' / 'ValidateRowButton.vala',
     dependencies: [

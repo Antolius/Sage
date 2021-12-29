@@ -23,6 +23,8 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
     public Game game { get; construct; }
     public int row { get; construct; }
 
+    private Gtk.Popover? help_popover;
+
     public ValidateRowButton (Game game, int row) {
         Object (
             game: game,
@@ -41,12 +43,13 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         sensitive = false;
         always_show_image = true;
         visible = false;
-        tooltip_text = _("Check row");
+        tooltip_text = _("Compare with code");
         get_style_context ().add_class ("circular");
 
         clicked.connect (() => game.validate_current_row ());
         update_validate_button ();
         game.notify["can-validate"].connect (update_validate_button);
+        game.notify["help-tour-step"].connect (update_help_popover);
     }
 
     public override void show_all () {
@@ -62,6 +65,21 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         visible = is_on_turn;
     }
 
+    private void update_help_popover () {
+        var on_turn = game.current_turn == row;
+        var validate_help = game.help_tour_step == Game.VALIDATE_HELP;
+        if (on_turn && validate_help) {
+            if (help_popover == null) {
+                help_popover = new HelpPopover (this, Game.VALIDATE_HELP);
+                help_popover.show_all ();
+            }
 
+            help_popover.popup ();
+        } else if (help_popover != null) {
+            help_popover.popdown ();
+            help_popover.destroy ();
+            help_popover = null;
+        }
+    }
 }
 

@@ -24,7 +24,10 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
 
     private OnNewGame on_new_game;
 
-    public HeaderBar (Game game, OnNewGame on_new_game) {
+    public HeaderBar (
+        Game game,
+        OnNewGame on_new_game
+    ) {
         Object (game: game);
         this.on_new_game = () => on_new_game ();
     }
@@ -34,8 +37,8 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
         show_close_button = true;
         decoration_layout = "close";
         custom_title = create_mode_switcher ();
-        var new_game = create_new_game_button ();
-        pack_start (new_game);
+        pack_start (create_new_game_button ());
+        pack_end (create_help_button ());
     }
 
     private Granite.Widgets.ModeButton create_mode_switcher () {
@@ -78,7 +81,28 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
             tooltip_text = _("Start a new game")
         };
 
-        btn.clicked.connect (() => on_new_game ());
+        btn.clicked.connect (() => on_new_game());
+        return btn;
+    }
+
+    private Gtk.ToggleButton create_help_button () {
+        var btn = new Gtk.ToggleButton () {
+            tooltip_text = _("Show help"),
+            always_show_image = true,
+            image = new Gtk.Image () {
+                gicon = new ThemedIcon ("help-contents-symbolic"),
+                pixel_size = 16
+            }
+        };
+
+        var id = btn.clicked.connect (game.toggle_help_tour);
+        game.notify["help-tour-step"].connect (() => {
+            if (game.help_tour_step == Game.NO_HELP) {
+                SignalHandler.block (btn, id);
+                btn.active = false;
+                SignalHandler.unblock (btn, id);
+            }
+        });
 
         return btn;
     }
