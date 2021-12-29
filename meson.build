@@ -23,6 +23,7 @@ executable(
     'src' / 'Widgets' / 'EndGameDialog.vala',
     'src' / 'Widgets' / 'GuessRow.vala',
     'src' / 'Widgets' / 'GuessToggle.vala',
+    'src' / 'Widgets' / 'HeaderBar.vala',
     'src' / 'Widgets' / 'HintsGrid.vala',
     'src' / 'Widgets' / 'ValidateRowButton.vala',
     dependencies: [

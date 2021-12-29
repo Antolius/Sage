@@ -88,15 +88,8 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void create_layout () {
-        var header_bar = new Hdy.HeaderBar () {
-            title = _("Sage"),
-            has_subtitle = false,
-            show_close_button = true,
-            decoration_layout = "close",
-            hexpand = true,
-        };
-
         grid = new Gtk.Grid ();
+        var header_bar = new Widgets.HeaderBar (game, reset_game);
         grid.attach (header_bar, 0, 0);
         board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);

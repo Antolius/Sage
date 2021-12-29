@@ -40,9 +40,13 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
         margin_top = 8;
         margin_bottom = 8;
         sensitive = row == game.current_turn;
+        get_style_context ().add_class ("circular");
 
         game.notify["current-turn"].connect (() => {
             sensitive = row == game.current_turn;
+            if (sensitive && column == 0) {
+                grab_focus ();
+            }
         });
 
         update_guess_button ();
@@ -59,7 +63,9 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
             }
         });
 
-        get_style_context ().add_class ("circular");
+        if (row == 0 && column == 0) {
+            realize.connect (grab_focus);
+        }
     }
 
     private void update_guess_button () {

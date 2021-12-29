@@ -80,6 +80,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
     private void mark_as_a_miss (Gtk.Image icon) {
         icon.gicon = new ThemedIcon ("emblem-disabled");
+        icon.tooltip_text = null;
     }
 }
 
