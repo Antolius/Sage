@@ -20,11 +20,15 @@
 
 public class Sage.Application : Gtk.Application {
 
+    public Settings state;
+
     public Application () {
         Object (
             application_id: "hr.from.josipantolis.sage",
             flags: ApplicationFlags.FLAGS_NONE
         );
+        
+        state = new Settings ("hr.from.josipantolis.sage");
     }
 
     protected override void activate () {

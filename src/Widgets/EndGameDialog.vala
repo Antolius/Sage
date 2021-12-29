@@ -18,9 +18,9 @@
 *
 */
 
-public class Sage.EndDialog : Granite.MessageDialog {
+public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
 
-    public EndDialog () {
+    public EndGameDialog () {
         base.with_image_from_icon_name (
             _("Victory"),
             _("Congratulations, you've cracked the code."),
@@ -29,7 +29,7 @@ public class Sage.EndDialog : Granite.MessageDialog {
         );
     }
 
-    public EndDialog.defeat () {
+    public EndGameDialog.defeat () {
         base.with_image_from_icon_name (
             _("Defeat"),
             _("You failed to cracked the code."),

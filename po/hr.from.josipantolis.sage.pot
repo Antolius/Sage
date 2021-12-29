@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the hr.from.josipantolis.sage package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/Board.vala:126
+#: src/Widgets/BoardGrid.vala:152
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: hr.from.josipantolis.sage\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-28 02:16+0100\n"
+"POT-Creation-Date: 2021-12-28 21:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,40 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/Board.vala:153
-msgid "Correct color on a correct position"
-msgstr ""
-
-#: src/Board.vala:156
-msgid "Correct color on a wrong position"
-msgstr ""
-
-#: src/EndDialog.vala:25
-msgid "Victory"
-msgstr ""
-
-#: src/EndDialog.vala:26
-msgid "Congratulations, you've cracked the code."
-msgstr ""
-
-#: src/EndDialog.vala:34
-msgid "Defeat"
-msgstr ""
-
-#: src/EndDialog.vala:35
-msgid "You failed to cracked the code."
-msgstr ""
-
-#: src/EndDialog.vala:42
-msgid "Quit"
-msgstr ""
-
-#: src/EndDialog.vala:43
-msgid "Play Again"
-msgstr ""
-
-#: src/MainWindow.vala:37 src/MainWindow.vala:65 data/sage.appdata.xml.in:4
-#: data/sage.desktop.in:6
+#: data/sage.appdata.xml.in:4 data/sage.desktop.in:6 src/MainWindow.vala:37
+#: src/MainWindow.vala:65
 msgid "Sage"
 msgstr ""
 
@@ -77,4 +45,36 @@ msgstr ""
 
 #: data/sage.desktop.in:11
 msgid "hr.from.josipantolis.sage"
+msgstr ""
+
+#: src/Widgets/BoardGrid.vala:171
+msgid "Correct color on a correct position"
+msgstr ""
+
+#: src/Widgets/BoardGrid.vala:174
+msgid "Correct color on a wrong position"
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:25
+msgid "Victory"
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:26
+msgid "Congratulations, you've cracked the code."
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:34
+msgid "Defeat"
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:35
+msgid "You failed to cracked the code."
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:42
+msgid "Quit"
+msgstr ""
+
+#: src/Widgets/EndGameDialog.vala:43
+msgid "Play Again"
 msgstr ""

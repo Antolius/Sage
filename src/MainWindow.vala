@@ -24,12 +24,13 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     public Game game { get; construct; }
 
     private Gtk.Grid grid;
-    private Board board;
+    private Widgets.BoardGrid board;
+    private uint configure_id;
 
     public MainWindow (Application application) {
         Object (
             app: application,
-            game: new Game (),
+            game: new Game (application.state),
             application: application,
             height_request: 640,
             width_request: 420,
@@ -55,9 +56,35 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     }
 
     construct {
+        link_position_to_state ();
         create_layout ();
         listen_to_game_over ();
         show_all ();
+    }
+
+    private void link_position_to_state () {
+        int window_x, window_y;
+        app.state.get ("window-position", "(ii)", out window_x, out window_y);
+        if (window_x != -1 || window_y != -1) {
+            move (window_x, window_y);
+        }
+    }
+
+    public override bool configure_event (Gdk.EventConfigure event) {
+        if (configure_id != 0) {
+            GLib.Source.remove (configure_id);
+        }
+
+        configure_id = Timeout.add (100, () => {
+            configure_id = 0;
+            int window_x, window_y;
+            get_position (out window_x, out window_y);
+            app.state.set ("window-position", "(ii)", window_x, window_y);
+
+            return false;
+        });
+
+        return base.configure_event (event);
     }
 
     private void create_layout () {
@@ -71,18 +98,18 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
         grid = new Gtk.Grid ();
         grid.attach (header_bar, 0, 0);
-        board = new Board (game);
+        board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);
         add (grid);
     }
 
     private void listen_to_game_over () {
         game.game_over.connect ((victory, code) => {
-            EndDialog dialog;
+            Widgets.EndGameDialog dialog;
             if (victory) {
-                dialog = new EndDialog ();
+                dialog = new Widgets.EndGameDialog ();
             } else {
-                dialog = new EndDialog.defeat ();
+                dialog = new Widgets.EndGameDialog.defeat ();
             }
 
             dialog.transient_for = this;
@@ -92,6 +119,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             if (response_id == Gtk.ResponseType.ACCEPT) {
                 reset_game ();
             } else {
+                game.reset ();
                 application.quit ();
             }
 
@@ -103,7 +131,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
         grid.remove_row (1);
         board.destroy ();
         game.reset ();
-        board = new Board (game);
+        board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);
         grid.show_all ();
     }

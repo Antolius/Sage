@@ -14,12 +14,17 @@ executable(
     meson.project_name(),
     gresource,
     'src' / 'Application.vala',
-    'src' / 'Board.vala',
-    'src' / 'Colors.vala',
-    'src' / 'EndDialog.vala',
     'src' / 'Game.vala',
     'src' / 'Hint.vala',
     'src' / 'MainWindow.vala',
+    'src' / 'Widgets' / 'BoardGrid.vala',
+    'src' / 'Widgets' / 'ColorPickerButton.vala',
+    'src' / 'Widgets' / 'Colors.vala',
+    'src' / 'Widgets' / 'EndGameDialog.vala',
+    'src' / 'Widgets' / 'GuessRow.vala',
+    'src' / 'Widgets' / 'GuessToggle.vala',
+    'src' / 'Widgets' / 'HintsGrid.vala',
+    'src' / 'Widgets' / 'ValidateRowButton.vala',
     dependencies: [
         dependency('gee-0.8'),
         dependency('gtk+-3.0'),
@@ -62,3 +67,8 @@ i18n.merge_file(
 )
 
 subdir('po')
+
+meson.add_install_script('meson/post_install.py')
+
+subdir('data')
+
