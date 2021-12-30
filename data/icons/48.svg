@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48" height="48" version="1.1" viewBox="0 0 12.7 12.7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="linearGradient16783">
+      <stop offset="0"/>
+      <stop stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient12467-7-5-7">
+      <stop stop-color="#fff" offset="0"/>
+      <stop stop-color="#fff" stop-opacity=".0029729" offset=".5085"/>
+      <stop stop-color="#fff" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient6078" x1="16.933" x2="16.933" y2="33.867" gradientTransform="matrix(.36885 0 0 .36885 .1041 .1041)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8f8f8" offset="0"/>
+      <stop stop-color="#e5e5e5" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient12469" x1="17.727" x2="17.727" y1=".79375" y2="33.073" gradientTransform="matrix(.35854 0 0 .35854 .27875 .27875)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient12467-7-5-7"/>
+    <linearGradient id="linearGradient15471" x1="8.4667" x2="8.4667" y1="31.75" y2="33.867" gradientUnits="userSpaceOnUse">
+      <stop stop-opacity=".0028925" offset="0"/>
+      <stop stop-opacity=".99879" offset=".50359"/>
+      <stop stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <radialGradient id="radialGradient16785" cx="6.35" cy="32.808" r="3.175" gradientTransform="matrix(-2.0009 -.0064398 .0010727 -.33333 19.021 43.785)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient16783"/>
+    <radialGradient id="radialGradient16785-0" cx="9.5235" cy="32.747" r="3.175" gradientTransform="matrix(-2.0009 -.0064398 .0010727 -.33333 46.537 43.785)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient16783"/>
+    <linearGradient id="linearGradient20120" x1="3.4396" x2="3.4396" y1="1.5875" y2="5.5563" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient12467-7-5-7"/>
+    <linearGradient id="linearGradient20402" x1="9.2604" x2="9.2604" y1="1.5875" y2="5.5563" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient12467-7-5-7"/>
+    <linearGradient id="linearGradient20748" x1="3.4396" x2="3.4396" y1="7.1438" y2="11.112" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient12467-7-5-7"/>
+    <linearGradient id="linearGradient21076" x1="8.9958" x2="8.9958" y1="7.1438" y2="11.112" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient12467-7-5-7"/>
+  </defs>
+  <g transform="matrix(.375 0 0 .37349 0 .051105)" fill-rule="evenodd" stroke-width=".70698">
+    <rect x="6.35" y="31.75" width="21.167" height="2.1167" ry="0" fill="url(#linearGradient15471)" opacity=".6"/>
+    <rect y="31.75" width="6.35" height="2.1167" fill="url(#radialGradient16785)" opacity=".6"/>
+    <rect x="27.517" y="31.75" width="6.35" height="2.1167" fill="url(#radialGradient16785-0)" opacity=".6"/>
+  </g>
+  <g fill-rule="evenodd">
+    <rect x=".39688" y=".39688" width="11.906" height="11.906" ry="1.5615" fill="url(#linearGradient6078)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".3" stroke-width=".26459"/>
+    <g transform="matrix(.75 0 0 .75 0 .26458)" opacity=".07" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".99924" stroke-width=".35278">
+      <ellipse cx="4.7625" cy="4.8115" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="12.171" cy="4.8115" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="4.7625" cy="12.19" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="12.171" cy="12.19" rx="2.6458" ry="2.6352"/>
+    </g>
+    <g transform="matrix(.75 0 0 .75 0 .26458)" opacity=".15">
+      <ellipse cx="4.7625" cy="4.8115" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="12.171" cy="4.8115" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="4.7625" cy="12.19" rx="2.6458" ry="2.6352"/>
+      <ellipse cx="12.171" cy="12.19" rx="2.6458" ry="2.6352"/>
+    </g>
+  </g>
+  <g transform="scale(.75)" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".3" stroke-width=".35278">
+    <ellipse cx="4.7625" cy="4.8115" rx="2.6458" ry="2.6352" fill="#a56de2"/>
+    <ellipse cx="12.171" cy="4.8115" rx="2.6458" ry="2.6352" fill="#f37329"/>
+    <ellipse cx="4.7625" cy="12.19" rx="2.6458" ry="2.6352" fill="#28bca3"/>
+    <ellipse cx="12.171" cy="12.19" rx="2.6458" ry="2.6352" fill="#d3d3d3"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x=".65781" y=".65781" width="11.384" height="11.384" rx="1.2912" ry="1.2912" stroke="url(#linearGradient12469)" stroke-opacity=".7" stroke-width=".25728"/>
+    <g stroke-opacity=".99698">
+      <ellipse cx="3.5719" cy="3.6096" rx="1.7363" ry="1.7293" opacity=".2" stroke="url(#linearGradient20120)" stroke-width=".23151"/>
+      <ellipse cx="9.1272" cy="3.6087" rx="1.7355" ry="1.7284" opacity=".2" stroke="url(#linearGradient20402)" stroke-width=".23139"/>
+      <ellipse cx="3.5719" cy="9.1436" rx="1.7363" ry="1.7293" opacity=".2" stroke="url(#linearGradient20748)" stroke-width=".23151"/>
+      <ellipse cx="9.1281" cy="9.1436" rx="1.7363" ry="1.7293" opacity=".2" stroke="url(#linearGradient21076)" stroke-width=".23151"/>
+    </g>
+  </g>
+</svg>
