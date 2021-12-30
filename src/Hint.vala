@@ -30,4 +30,3 @@ public class Sage.Hint : Object {
         );
     }
 }
-

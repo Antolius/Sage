@@ -84,4 +84,3 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
         }
     }
 }
-

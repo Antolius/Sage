@@ -74,14 +74,14 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
     }
 
     private Gtk.Button create_new_game_button () {
-        var btn = new Gtk.Button.from_icon_name  (
+        var btn = new Gtk.Button.from_icon_name (
             "view-refresh-symbolic",
             Gtk.IconSize.SMALL_TOOLBAR
         ) {
             tooltip_text = _("Start a new game")
         };
 
-        btn.clicked.connect (() => on_new_game());
+        btn.clicked.connect (() => on_new_game ());
         return btn;
     }
 
@@ -109,4 +109,3 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
 }
 
 public delegate void Sage.Widgets.OnNewGame ();
-

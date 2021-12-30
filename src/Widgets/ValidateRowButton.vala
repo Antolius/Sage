@@ -82,4 +82,3 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         }
     }
 }
-
