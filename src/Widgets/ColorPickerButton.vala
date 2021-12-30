@@ -34,4 +34,3 @@ public class Sage.Widgets.ColorPickerButton : Granite.Widgets.ModeButton {
         }
     }
 }
-

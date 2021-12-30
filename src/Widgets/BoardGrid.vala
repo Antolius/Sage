@@ -55,4 +55,3 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
         attach (color_picker, 0, game.max_guesses);
     }
 }
-

@@ -89,4 +89,3 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
     }
 
 }
-

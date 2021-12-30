@@ -163,7 +163,7 @@ public class Sage.Game : Object {
         row_a[i] = guess;
         guesses_a[current_turn] = new Gee.ArrayList<int>.wrap (row_a);
         guesses = new Gee.ArrayList<Gee.List<int>>.wrap (guesses_a);
-        can_validate = current_turn_guesses_are_full();
+        can_validate = current_turn_guesses_are_full ();
         update_help_tour_after_guess_submission ();
         store_guesses ();
     }
@@ -209,7 +209,7 @@ public class Sage.Game : Object {
                 correct_positions++;
             }
 
-            if (helper.contains(guess[i])) {
+            if (helper.contains (guess[i])) {
                 correct_colors++;
                 helper.remove (guess[i]);
             }
@@ -232,7 +232,7 @@ public class Sage.Game : Object {
         var elements = new Variant[max_guesses];
         for (int i = 0; i < max_guesses; i++) {
             var hint = hints[i];
-            elements[i] = new Variant.tuple({
+            elements[i] = new Variant.tuple ({
                 new Variant.int32 ((int32) hint.correct_colors_count),
                 new Variant.int32 ((int32) hint.correct_positions_count)
             });
@@ -287,4 +287,3 @@ public class Sage.Game : Object {
         }
     }
 }
-

@@ -76,4 +76,3 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
         custom_bin.add (row);
     }
 }
-

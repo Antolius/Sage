@@ -45,7 +45,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
 
     private static void load_style () {
-        var provider = new Gtk.CssProvider();
+        var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("hr/from/josipantolis/sage/style.css");
         var screen = Gdk.Screen.get_default ();
         Gtk.StyleContext.add_provider_for_screen (
@@ -129,4 +129,3 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
         grid.show_all ();
     }
 }
-

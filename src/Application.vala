@@ -27,7 +27,7 @@ public class Sage.Application : Gtk.Application {
             application_id: "hr.from.josipantolis.sage",
             flags: ApplicationFlags.FLAGS_NONE
         );
-        
+
         state = new Settings ("hr.from.josipantolis.sage");
     }
 
@@ -54,7 +54,7 @@ public class Sage.Application : Gtk.Application {
     }
 
     private void foce_elementary_style () {
-        var settings = Gtk.Settings.get_default();
+        var settings = Gtk.Settings.get_default ();
         if (!settings.gtk_theme_name.has_prefix ("io.elementary.stylesheet")) {
             settings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
         }
@@ -68,11 +68,12 @@ public class Sage.Application : Gtk.Application {
         var granite_settings = Granite.Settings.get_default ();
         var gtk_settings = Gtk.Settings.get_default ();
 
-        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        var dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        gtk_settings.gtk_application_prefer_dark_theme = dark_mode;
 
         granite_settings.notify["prefers-color-scheme"].connect (() => {
-            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            var dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            gtk_settings.gtk_application_prefer_dark_theme = dark_mode;
         });
     }
 }
-

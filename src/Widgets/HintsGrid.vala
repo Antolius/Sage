@@ -60,7 +60,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         for (int i = 0; i < game.code_length; i++) {
             if (i < hint.correct_positions_count) {
                 mark_as_correct_position (icons[i]);
-            } else if (i < hint.correct_colors_count){
+            } else if (i < hint.correct_colors_count) {
                 mark_as_correct_color (icons[i]);
             } else {
                 mark_as_a_miss (icons[i]);
@@ -102,4 +102,3 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         }
     }
 }
-
