@@ -4,8 +4,9 @@ Type=Application
 
 Name=Sage
 GenericName=Code Breaking Game
-Comment=Guess a secret combination
+Comment=Have fun guessing a secret code
 Categories=Game;BoardGame;LogicGame;
+Keywords=Code;Breaking;Master;Puzzle;
 
 Icon=hr.from.josipantolis.sage
 Exec=hr.from.josipantolis.sage
