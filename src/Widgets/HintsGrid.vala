@@ -23,6 +23,9 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
     public Game game { get; construct; }
     public int row { get; construct; }
 
+    private Gtk.Image[] icons;
+    private Gtk.Popover? help_popover;
+
     public HintsGrid (Game game, int row) {
         Object (
             game: game,
@@ -36,7 +39,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         margin_top = 2;
         margin_bottom = 2;
 
-        var icons = new Gtk.Image[game.code_length];
+        icons = new Gtk.Image[game.code_length];
         for (int i = 0; i < game.code_length; i++) {
             icons[i] = new Gtk.Image () {
                 gicon = new ThemedIcon ("emblem-disabled"),
@@ -47,13 +50,12 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
             attach (icons[i], i / 2, i % 2);
         }
 
-        update_hint_icons (icons);
-        game.notify["hints"].connect (() => {
-            update_hint_icons (icons);
-        });
+        update_hint_icons ();
+        game.notify["hints"].connect (update_hint_icons);
+        game.notify["help-tour-step"].connect (update_help_popover);
     }
 
-    private void update_hint_icons (Gtk.Image[] icons) {
+    private void update_hint_icons () {
         var hint = game.hints[row];
         for (int i = 0; i < game.code_length; i++) {
             if (i < hint.correct_positions_count) {
@@ -80,6 +82,24 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
     private void mark_as_a_miss (Gtk.Image icon) {
         icon.gicon = new ThemedIcon ("emblem-disabled");
+        icon.tooltip_text = null;
+    }
+
+    private void update_help_popover () {
+        var on_next_turn = game.current_turn - 1 == row;
+        var hint_help = game.help_tour_step == Game.HINT_HELP;
+        if (on_next_turn && hint_help) {
+            if (help_popover == null) {
+                help_popover = new HelpPopover (this, Game.HINT_HELP);
+                help_popover.show_all ();
+            }
+
+            help_popover.popup ();
+        } else if (help_popover != null) {
+            help_popover.popdown ();
+            help_popover.destroy ();
+            help_popover = null;
+        }
     }
 }
 

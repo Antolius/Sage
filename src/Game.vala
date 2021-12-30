@@ -21,6 +21,10 @@
 public class Sage.Game : Object {
 
     public const int EMPTY_GUESS = -1;
+    public const int NO_HELP = 0;
+    public const int GUESS_HELP = 1;
+    public const int VALIDATE_HELP = 2;
+    public const int HINT_HELP = 3;
 
     public int max_guesses { get; set; }
     public int code_length { get; set; }
@@ -30,6 +34,7 @@ public class Sage.Game : Object {
     public Gee.List<Hint> hints { get; set; }
     public Gee.List<Gee.List<int>> guesses { get; set; }
     public bool can_validate { get; set; }
+    public int help_tour_step { get; set; default = 0; }
 
     public signal void game_over (bool victory, int[] code);
 
@@ -110,6 +115,7 @@ public class Sage.Game : Object {
 
     public void reset () {
         current_turn = 0;
+        help_tour_step = 0;
         code = generate_new_code ();
         store_code ();
         hints = generate_empty_hints ();
@@ -158,6 +164,7 @@ public class Sage.Game : Object {
         guesses_a[current_turn] = new Gee.ArrayList<int>.wrap (row_a);
         guesses = new Gee.ArrayList<Gee.List<int>>.wrap (guesses_a);
         can_validate = current_turn_guesses_are_full();
+        update_help_tour_after_guess_submission ();
         store_guesses ();
     }
 
@@ -190,6 +197,7 @@ public class Sage.Game : Object {
 
         current_turn++;
         can_validate = false;
+        update_help_tour_after_validation ();
     }
 
     private Hint validate_a_guess (int[] guess) {
@@ -248,6 +256,35 @@ public class Sage.Game : Object {
 
         var guesses_v = new Variant.array (new VariantType ("ai"), outer_els);
         state.set_value ("guesses", guesses_v);
+    }
+
+    public void toggle_help_tour () {
+        if (help_tour_step > NO_HELP) {
+            help_tour_step = NO_HELP;
+        } else if (can_validate) {
+            help_tour_step = VALIDATE_HELP;
+        } else {
+            help_tour_step = GUESS_HELP;
+        }
+    }
+
+    private void update_help_tour_after_guess_submission () {
+        if (help_tour_step == GUESS_HELP && can_validate) {
+            // player toggled all the pins while help on guessing is shown
+            help_tour_step = VALIDATE_HELP;
+        } else if (help_tour_step == VALIDATE_HELP && !can_validate) {
+            // player untoggled a pin while help on validate button is shown
+            help_tour_step = GUESS_HELP;
+        } else if (help_tour_step == HINT_HELP) {
+            // player toggled a pin while help on hits is shown
+            help_tour_step = NO_HELP;
+        }
+    }
+
+    private void update_help_tour_after_validation () {
+        if (help_tour_step == VALIDATE_HELP) {
+            help_tour_step = HINT_HELP;
+        }
     }
 }
 

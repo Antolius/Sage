@@ -24,6 +24,8 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
     public Game game { get; construct; }
     public int row { get; construct; }
 
+    private Gtk.Popover? help_popover;
+
     public GuessRow (Game game, int row) {
         Object (
             game: game,
@@ -33,23 +35,16 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
 
     construct {
         column_spacing = 8;
-
-        update_row_class ();
-        game.notify["current-turn"].connect (() => {
-            update_row_class ();
-        });
-
         get_style_context ().add_class ("circular");
 
+        update_row_class ();
+        game.notify["current-turn"].connect (update_row_class);
+        game.notify["help-tour-step"].connect (update_help_popover);
+
+        var flags = BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE;
         for (int i = 0; i < game.code_length; i++) {
             var btn = new GuessToggle (game, row, i);
-            bind_property (
-                "current_color",
-                btn,
-                "current_color",
-                BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE
-            );
-
+            bind_property ("current_color", btn, "current_color", flags);
             attach (btn, i, 0);
         }
 
@@ -69,6 +64,23 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
             ctx.add_class (Granite.STYLE_CLASS_CARD);
         } else {
             ctx.remove_class (Granite.STYLE_CLASS_CARD);
+        }
+    }
+
+    private void update_help_popover () {
+        var on_turn = game.current_turn == row;
+        var guess_help = game.help_tour_step == Game.GUESS_HELP;
+        if (on_turn && guess_help) {
+            if (help_popover == null) {
+                help_popover = new HelpPopover (this, Game.GUESS_HELP);
+                help_popover.show_all ();
+            }
+
+            help_popover.popup ();
+        } else if (help_popover != null) {
+            help_popover.popdown ();
+            help_popover.destroy ();
+            help_popover = null;
         }
     }
 }

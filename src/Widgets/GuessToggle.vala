@@ -40,29 +40,23 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
         margin_top = 8;
         margin_bottom = 8;
         sensitive = row == game.current_turn;
-
-        game.notify["current-turn"].connect (() => {
-            sensitive = row == game.current_turn;
-        });
-
-        update_guess_button ();
-        game.notify["guesses"].connect (() => {
-            update_guess_button ();
-        });
-
-        toggled.connect (() => {
-            var game_state = game.guesses[row][column];
-            if (active && game_state == Game.EMPTY_GUESS) {
-                game.submit_a_guess (column, current_color);
-            } else if (!active && game_state != Game.EMPTY_GUESS) {
-                game.submit_a_guess (column, Game.EMPTY_GUESS);
-            }
-        });
-
         get_style_context ().add_class ("circular");
+        update_button_activity ();
+
+        toggled.connect (handle_toggle);
+        realize.connect (update_button_sensitivity);
+        game.notify["current-turn"].connect (update_button_sensitivity);
+        game.notify["guesses"].connect (update_button_activity);
     }
 
-    private void update_guess_button () {
+    private void update_button_sensitivity () {
+        sensitive = row == game.current_turn;
+        if (sensitive && column == 0) {
+            grab_focus ();
+        }
+    }
+
+    private void update_button_activity () {
         var guess = game.guesses[row][column];
         if (guess == Game.EMPTY_GUESS) {
             active = false;
@@ -83,6 +77,15 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
     private void set_color_class (int color_idx) {
         var color_class = Colors.STYLE_CLASS[color_idx];
         get_style_context ().add_class (color_class);
+    }
+
+    private void handle_toggle () {
+        var game_state = game.guesses[row][column];
+        if (active && game_state == Game.EMPTY_GUESS) {
+            game.submit_a_guess (column, current_color);
+        } else if (!active && game_state != Game.EMPTY_GUESS) {
+            game.submit_a_guess (column, Game.EMPTY_GUESS);
+        }
     }
 
 }

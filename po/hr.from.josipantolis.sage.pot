@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the hr.from.josipantolis.sage package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/Widgets/BoardGrid.vala:152
+#: src/Widgets/HintsGrid.vala:47
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: hr.from.josipantolis.sage\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-28 21:56+0100\n"
+"POT-Creation-Date: 2021-12-30 00:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/sage.appdata.xml.in:4 data/sage.desktop.in:6 src/MainWindow.vala:37
-#: src/MainWindow.vala:65
+#: data/sage.appdata.xml.in:4 data/sage.desktop.in:6 src/MainWindow.vala:38
 msgid "Sage"
 msgstr ""
 
@@ -47,14 +46,6 @@ msgstr ""
 msgid "hr.from.josipantolis.sage"
 msgstr ""
 
-#: src/Widgets/BoardGrid.vala:171
-msgid "Correct color on a correct position"
-msgstr ""
-
-#: src/Widgets/BoardGrid.vala:174
-msgid "Correct color on a wrong position"
-msgstr ""
-
 #: src/Widgets/EndGameDialog.vala:25
 msgid "Victory"
 msgstr ""
@@ -77,4 +68,53 @@ msgstr ""
 
 #: src/Widgets/EndGameDialog.vala:43
 msgid "Play Again"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:46
+msgid "Classic"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:47
+msgid "Advanced"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:81
+msgid "Start a new game"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:90
+msgid "Show help"
+msgstr ""
+
+#: src/Widgets/HelpPopover.vala:39
+msgid ""
+"Try to match the secret code by coloring pins. All pins in the row need to "
+"be colored, and several pins can share the same color. As the game "
+"progresses, you'll gain more insight, but at first it's ok to pick a couple "
+"of colors at random."
+msgstr ""
+
+#: src/Widgets/HelpPopover.vala:41
+msgid ""
+"After coloring all pins in the row, you can compare it with the secret code."
+msgstr ""
+
+#: src/Widgets/HelpPopover.vala:43
+msgid ""
+"You received at most one hint for each pin. Now you need to figure out which "
+"hint corresponds to which pin. As you play, you'll submit more rows for "
+"validation, so make sure to consider all their hints. Remember: secret code "
+"remains the same throughout the game!"
+msgstr ""
+
+#: src/Widgets/HintsGrid.vala:75
+msgid "Correct color on a correct position"
+msgstr ""
+
+#: src/Widgets/HintsGrid.vala:80
+msgid "Correct color on a wrong position"
+msgstr ""
+
+#: src/Widgets/ValidateRowButton.vala:46
+msgid "Compare with code"
 msgstr ""

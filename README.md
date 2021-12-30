@@ -3,16 +3,29 @@
 
 A code breaking game made for [elementary OS](https://elementary.io/).
 
-[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/hr.from.josipantolis.sage)
+|![Default style screenshot](data/screenshots/classic.png)|![Dark style screenshot](data/screenshots/advanced.png)     |
+|---------------------------------------------------------|--------------------------------------------------------|
+| Classic game in progress, showcasing the default style  | Advanced game with the help tour showing in dark style |
 
-|![Default style screenshot](data/screenshots/default.png)|![Dark style screenshot](data/screenshots/dark.png)|
-|---------------------------------------------------------|---------------------------------------------------|
-| Default style screenshot                                | Dark style screenshot                             |
+## What's up with that name?
 
+> **sage** `noun`: one (such as a profound philosopher) distinguished for wisdom
+>
+> [Merriam-Webster](https://www.merriam-webster.com/dictionary/sage)
 
-## Building and Installation
+I guess you need to be a sage in order to master this game. Or you'll turn into a sage by mere act of playing the game? Either way, you are the sage in the end.
 
-### Meson build
+## Kudos
+
+- Inspiration for this game came form [@colinkiama's](https://github.com/colinkiama) [Challenge #2: Tabletop](https://www.reddit.com/r/vala/comments/r2j21y/challenge_2_tabletop/) over at [r/vala subreddit](https://www.reddit.com/r/vala). Kudos to Colin for energizing the Vala community over on Reddit, it makes app development in the ecosystem exciting!
+- Next, I was heavily influenced by [@igordsm's](https://github.com/igordsm) recent [blog posts](https://dev.to/igordsm/vala-reactive-programming-2pf4) on reactive programming in Vala. Kudos to Igor for thinking through and eloquently elaborating on this design pattern!
+- Lastly, elementary app development wouldn't be possible without the [elementary team](https://elementary.io/team). So kudos to [Danielle](https://github.com/danrabbit) and [Cassidy](https://github.com/cassidyjames) for running the show and the entire team for making elementary OS such a nice platform to develop for!
+
+## On to the business
+
+Sage will, hopefully, soon be published on [AppCenter](https://appcenter.elementary.io). Until then, and especially if you want to mess around with the code or even contribute to it, you can build it locally. You can find detailed instructions for setting up local environment in [elementary developer docs](https://docs.elementary.io/develop/writing-apps/the-basic-setup).
+
+### Build it with meson
 
 You can meet all dependencies by installing elementary SDK:
 
@@ -37,7 +50,7 @@ ninja install
 hr.from.josipantolis.sage
 ```
 
-### Flatpak build
+### Build it with flatpak
 
 You may need to install elementary flatpak runtime first. You can do that with:
 
@@ -57,7 +70,7 @@ then execute with:
 flatpak run hr.from.josipantolis.sage
 ```
 
-## Translations
+### Translate it?!
 
 To generate translation files execute
 
