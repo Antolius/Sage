@@ -1,4 +1,4 @@
-<img align="left" width="64" height="64" src="https://raw.githubusercontent.com/Antolius/Sage/main/data/icons/64.svg">
+<img align="left" width="64" height="64" src="data/icons/64.svg">
 <h1>Sage</h1>
 
 A code breaking game made for [elementary OS](https://elementary.io/).
