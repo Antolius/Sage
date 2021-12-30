@@ -32,26 +32,27 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
     }
 
     construct {
+        create_rows ();
+        game.game_reset_started.connect (reset);
+        game.game_reset_finished.connect (create_rows);
+    }
+
+    private void reset () {
+        get_children ().foreach (remove);
+        current_color = 0;
+    }
+
+    private void create_rows () {
+        var bind_flags = BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE;
         for (int i = 0; i < game.max_guesses; i++) {
             var row = new GuessRow (game, game.max_guesses - i - 1);
-            bind_property (
-                "current_color",
-                row,
-                "current_color",
-                BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE
-            );
-
+            bind_property ("current_color", row, "current_color", bind_flags);
             attach (row, 0, i);
         }
 
         var color_picker = new ColorPickerButton (game);
-        bind_property (
-            "current_color",
-            color_picker,
-            "selected",
-            BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE
-        );
-
+        bind_property ("current_color", color_picker, "selected", bind_flags);
         attach (color_picker, 0, game.max_guesses);
+        show_all ();
     }
 }

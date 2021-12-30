@@ -22,14 +22,8 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
 
     public Game game { get; construct; }
 
-    private OnNewGame on_new_game;
-
-    public HeaderBar (
-        Game game,
-        OnNewGame on_new_game
-    ) {
+    public HeaderBar (Game game) {
         Object (game: game);
-        this.on_new_game = () => on_new_game ();
     }
 
     construct {
@@ -63,14 +57,10 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
 
     private void switch_mode_to (int mode) {
         if (mode == 0) {
-            game.code_length = 4;
-            game.number_of_colors = 6;
+            game.reconfigure (4, 6);
         } else {
-            game.code_length = 5;
-            game.number_of_colors = 8;
+            game.reconfigure (5, 8);
         }
-
-        on_new_game ();
     }
 
     private Gtk.Button create_new_game_button () {
@@ -81,7 +71,7 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
             tooltip_text = _("Start a new game")
         };
 
-        btn.clicked.connect (() => on_new_game ());
+        btn.clicked.connect (game.reset);
         return btn;
     }
 

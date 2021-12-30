@@ -89,7 +89,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
     private void create_layout () {
         grid = new Gtk.Grid ();
-        var header_bar = new Widgets.HeaderBar (game, reset_game);
+        var header_bar = new Widgets.HeaderBar (game);
         grid.attach (header_bar, 0, 0);
         board = new Widgets.BoardGrid (game);
         grid.attach (board, 0, 1);
@@ -110,7 +110,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
             var response_id = dialog.run ();
             if (response_id == Gtk.ResponseType.ACCEPT) {
-                reset_game ();
+                game.reset ();
             } else {
                 game.reset ();
                 application.quit ();
@@ -118,14 +118,5 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
             dialog.destroy ();
         });
-    }
-
-    private void reset_game () {
-        grid.remove_row (1);
-        board.destroy ();
-        game.reset ();
-        board = new Widgets.BoardGrid (game);
-        grid.attach (board, 0, 1);
-        grid.show_all ();
     }
 }
