@@ -72,8 +72,8 @@ public class Sage.Application : Gtk.Application {
         gtk_settings.gtk_application_prefer_dark_theme = dark_mode;
 
         granite_settings.notify["prefers-color-scheme"].connect (() => {
-            var dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
-            gtk_settings.gtk_application_prefer_dark_theme = dark_mode;
+            var dm = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            gtk_settings.gtk_application_prefer_dark_theme = dm;
         });
     }
 }
