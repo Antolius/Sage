@@ -37,6 +37,8 @@ public class Sage.Game : Object {
     public int help_tour_step { get; set; default = 0; }
 
     public signal void game_over (bool victory, int[] code);
+    public signal void game_reset_started ();
+    public signal void game_reset_finished ();
 
     private Settings state;
     private Gee.List<int> code;
@@ -114,6 +116,20 @@ public class Sage.Game : Object {
     }
 
     public void reset () {
+        game_reset_started ();
+        reset_game_state ();
+        game_reset_finished ();
+    }
+
+    public void reconfigure (int code_length, int number_of_colors) {
+        game_reset_started ();
+        this.code_length = code_length;
+        this.number_of_colors = number_of_colors;
+        reset_game_state ();
+        game_reset_finished ();
+    }
+
+    private void reset_game_state () {
         current_turn = 0;
         help_tour_step = 0;
         code = generate_new_code ();
