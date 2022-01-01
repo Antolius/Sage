@@ -20,17 +20,24 @@
 
 public class Sage.Widgets.ColorPickerButton : Granite.Widgets.ModeButton {
 
+    private static Gdk.Pixbuf[] PIXBUFS = new Gdk.Pixbuf[Colors.CODE.length];
+
     public Game game { get; construct; }
 
     public ColorPickerButton (Game game) {
         Object (game: game);
     }
 
+    static construct {
+        for (int i = 0; i < Colors.CODE.length; i++) {
+            PIXBUFS[i] = new Gdk.Pixbuf (Gdk.Colorspace.RGB, true, 8, 32, 32);
+            PIXBUFS[i].fill (Colors.CODE[i]);
+        }
+    }
+
     construct {
         for (int i = 0; i < game.number_of_colors; i++) {
-            var color = new Gdk.Pixbuf (Gdk.Colorspace.RGB, true, 8, 32, 32);
-            color.fill (Colors.CODE[i]);
-            append_pixbuf (color);
+            append_pixbuf (PIXBUFS[i]);
         }
     }
 }

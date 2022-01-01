@@ -38,13 +38,8 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
     }
 
     private void reset () {
+        @foreach (child => child.destroy ());
         current_color = 0;
-        get_children ().foreach (child => {
-            remove (child);
-            if (child is Granite.Widgets.ModeButton) {
-                child.destroy ();
-            }
-        });
     }
 
     private void create_rows () {

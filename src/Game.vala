@@ -40,32 +40,50 @@ public class Sage.Game : Object {
     public signal void game_reset_started ();
     public signal void game_reset_finished ();
 
-    private Settings state;
+    private Store store;
     private Gee.List<int> code;
 
-    public Game (Settings state) {
-        this.state = state;
+    public Game (Store store) {
+        this.store = store;
         link_to_state ();
     }
 
     private void link_to_state () {
-        var flags = GLib.SettingsBindFlags.DEFAULT;
-        state.bind ("max-guesses", this, "max-guesses", flags);
-        state.bind ("code-length", this, "code-length", flags);
-        state.bind ("number-of-colors", this, "number-of-colors", flags);
-        state.bind ("current-turn", this, "current-turn", flags);
-        state.bind ("can-validate", this, "can-validate", flags);
+        code_length = store.get_int ("code-length");
+        notify["code-length"].connect (() => {
+            store.set_int ("code-length", code_length);
+        });
 
-        read_code_from (state.get_value ("code"));
-        read_hints_from (state.get_value ("hints"));
-        read_guesses_from (state.get_value ("guesses"));
+        number_of_colors = store.get_int ("number-of-colors");
+        notify["number-of-colors"].connect (() => {
+            store.set_int ("number-of-colors", number_of_colors);
+        });
+
+        max_guesses = store.get_int ("max-guesses");
+        notify["max-guesses"].connect (() => {
+            store.set_int ("max-guesses", max_guesses);
+        });
+
+        current_turn = store.get_int ("current-turn");
+        notify["current-turn"].connect (() => {
+            store.set_int ("current-turn", current_turn);
+        });
+
+        can_validate = store.get_boolean ("can-validate");
+        notify["can-validate"].connect (() => {
+            store.set_boolean ("can-validate", can_validate);
+        });
+
+        read_code_from (store.get_value ("code"));
+        read_hints_from (store.get_value ("hints"));
+        read_guesses_from (store.get_value ("guesses"));
     }
 
     private void read_code_from (Variant variant) {
         var iter = variant.iterator ();
         if (iter.n_children () == 0) {
             code = generate_new_code ();
-            store_code.begin ();
+            store_code ();
             return;
         }
 
@@ -80,7 +98,7 @@ public class Sage.Game : Object {
         var iter = variant.iterator ();
         if (iter.n_children () == 0) {
             hints = generate_empty_hints ();
-            store_hints.begin ();
+            store_hints ();
             return;
         }
 
@@ -96,7 +114,7 @@ public class Sage.Game : Object {
         var outer_iter = variant.iterator ();
         if (outer_iter.n_children () == 0) {
             guesses = generate_empty_guesses ();
-            store_guesses.begin ();
+            store_guesses ();
             return;
         }
 
@@ -125,12 +143,12 @@ public class Sage.Game : Object {
         current_turn = 0;
         help_tour_step = 0;
         can_validate = false;
-        var code_v = new Variant.array (new VariantType ("i"), {});
-        state.set_value ("code", code_v);
-        var hints_v = new Variant.array (new VariantType ("(ii)"), {});
-        state.set_value ("hints", hints_v);
         var guesses_v = new Variant.array (new VariantType ("ai"), {});
-        state.set_value ("guesses", guesses_v);
+        store.set_value ("guesses", guesses_v);
+        var code_v = new Variant.array (new VariantType ("i"), {});
+        store.set_value ("code", code_v);
+        var hints_v = new Variant.array (new VariantType ("(ii)"), {});
+        store.set_value ("hints", hints_v);
     }
 
     public void reconfigure (int code_length, int number_of_colors) {
@@ -145,11 +163,11 @@ public class Sage.Game : Object {
         current_turn = 0;
         help_tour_step = 0;
         code = generate_new_code ();
-        store_code.begin ();
+        store_code ();
         hints = generate_empty_hints ();
-        store_hints.begin ();
+        store_hints ();
         guesses = generate_empty_guesses ();
-        store_guesses.begin ();
+        store_guesses ();
         can_validate = false;
     }
 
@@ -193,7 +211,7 @@ public class Sage.Game : Object {
         guesses = new Gee.ArrayList<Gee.List<int>>.wrap (guesses_a);
         can_validate = current_turn_guesses_are_full ();
         update_help_tour_after_guess_submission ();
-        store_guesses.begin ();
+        store_guesses ();
     }
 
     private bool current_turn_guesses_are_full () {
@@ -211,7 +229,7 @@ public class Sage.Game : Object {
         Hint[] hints_a = hints.to_array ();
         hints_a[current_turn] = hint;
         hints = new Gee.ArrayList<Hint>.wrap (hints_a);
-        store_hints.begin ();
+        store_hints ();
 
         if (hint.correct_positions_count == code_length) {
             game_over (true, code.to_array ());
@@ -246,21 +264,17 @@ public class Sage.Game : Object {
         return new Hint (correct_colors, correct_positions);
     }
 
-    private async void store_code () {
-        Idle.add (store_code.callback);
-        yield;
+    private void store_code () {
         var elements = new Variant[code_length];
         for (int i = 0; i < code_length; i++) {
             elements[i] = new Variant.int32 ((int32) code[i]);
         }
 
         var code_v = new Variant.array (new VariantType ("i"), elements);
-        state.set_value ("code", code_v);
+        store.set_value ("code", code_v);
     }
 
-    private async void store_hints () {
-        Idle.add (store_hints.callback);
-        yield;
+    private void store_hints () {
         var elements = new Variant[max_guesses];
         for (int i = 0; i < max_guesses; i++) {
             var hint = hints[i];
@@ -271,12 +285,10 @@ public class Sage.Game : Object {
         }
 
         var hints_v = new Variant.array (new VariantType ("(ii)"), elements);
-        state.set_value ("hints", hints_v);
+        store.set_value ("hints", hints_v);
     }
 
-    private async void store_guesses () {
-        Idle.add (store_guesses.callback);
-        yield;
+    private void store_guesses () {
         var outer_els = new Variant[max_guesses];
         for (int i = 0; i < max_guesses; i++) {
             var inner_els = new Variant[code_length];
@@ -289,7 +301,7 @@ public class Sage.Game : Object {
         }
 
         var guesses_v = new Variant.array (new VariantType ("ai"), outer_els);
-        state.set_value ("guesses", guesses_v);
+        store.set_value ("guesses", guesses_v);
     }
 
     public void toggle_help_tour () {
