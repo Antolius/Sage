@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -20,15 +20,11 @@
 
 public class Sage.Application : Gtk.Application {
 
-    public Settings state;
-
     public Application () {
         Object (
             application_id: "hr.from.josipantolis.sage",
             flags: ApplicationFlags.FLAGS_NONE
         );
-
-        state = new Settings ("hr.from.josipantolis.sage");
     }
 
     protected override void activate () {
@@ -37,8 +33,12 @@ public class Sage.Application : Gtk.Application {
             var window = existing_windows.first ().data as MainWindow;
             window.present ();
         } else {
-            var window = new MainWindow (this);
+            var settings = new Settings ("hr.from.josipantolis.sage");
+            var store = new Store (settings);
+            var game = new Game (store);
+            var window = new MainWindow (this, store, game);
             window.show ();
+            shutdown.connect (() => store.shutdown_gracefully ());
         }
     }
 

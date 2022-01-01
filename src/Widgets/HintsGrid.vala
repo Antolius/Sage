@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -57,7 +57,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
     private void update_hint_icons () {
         var hint = game.hints[row];
-        for (int i = 0; i < game.code_length; i++) {
+        for (int i = 0; i < icons.length; i++) {
             if (i < hint.correct_positions_count) {
                 mark_as_correct_position (icons[i]);
             } else if (i < hint.correct_colors_count) {

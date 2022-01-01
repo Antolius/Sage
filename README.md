@@ -83,5 +83,4 @@ ninja hr.from.josipantolis.sage-update-po
 
 [GNU GPLv3](COPYING)
 
-Copyright © 2021 Josip Antoliš, josip.antolis@protonmail.com.
-
+Copyright © 2022 Josip Antoliš, josip.antolis@protonmail.com.

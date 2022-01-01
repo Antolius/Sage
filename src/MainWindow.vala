@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -20,20 +20,18 @@
 
 public class Sage.MainWindow : Hdy.ApplicationWindow {
 
-    public Application app { get; construct; }
     public Game game { get; construct; }
+    public Store store { get; construct; }
 
     private Gtk.Grid grid;
     private Widgets.BoardGrid board;
     private uint configure_id;
 
-    public MainWindow (Application application) {
+    public MainWindow (Application application, Store store, Game game) {
         Object (
-            app: application,
-            game: new Game (application.state),
+            game: game,
+            store: store,
             application: application,
-            height_request: 640,
-            width_request: 420,
             resizable: false,
             title: _("Sage")
         );
@@ -42,7 +40,6 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     static construct {
         load_style ();
     }
-
 
     private static void load_style () {
         var provider = new Gtk.CssProvider ();
@@ -64,7 +61,8 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
 
     private void link_position_to_state () {
         int window_x, window_y;
-        app.state.get ("window-position", "(ii)", out window_x, out window_y);
+        var pos = store.get_value ("window-position");
+        pos.get ("(ii)", out window_x, out window_y);
         if (window_x != -1 || window_y != -1) {
             move (window_x, window_y);
         }
@@ -79,8 +77,12 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             configure_id = 0;
             int window_x, window_y;
             get_position (out window_x, out window_y);
-            app.state.set ("window-position", "(ii)", window_x, window_y);
+            var pos = new Variant.tuple ({
+                new Variant.int32 (window_x),
+                new Variant.int32 (window_y)
+            });
 
+            store.set_value ("window-position", pos);
             return false;
         });
 
@@ -112,7 +114,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             if (response_id == Gtk.ResponseType.ACCEPT) {
                 game.reset ();
             } else {
-                game.reset ();
+                game.quit ();
                 application.quit ();
             }
 

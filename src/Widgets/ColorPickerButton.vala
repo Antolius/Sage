@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -20,17 +20,24 @@
 
 public class Sage.Widgets.ColorPickerButton : Granite.Widgets.ModeButton {
 
+    private static Gdk.Pixbuf[] pixbufs = new Gdk.Pixbuf[Colors.CODE.length];
+
     public Game game { get; construct; }
 
     public ColorPickerButton (Game game) {
         Object (game: game);
     }
 
+    static construct {
+        for (int i = 0; i < Colors.CODE.length; i++) {
+            pixbufs[i] = new Gdk.Pixbuf (Gdk.Colorspace.RGB, true, 8, 32, 32);
+            pixbufs[i].fill (Colors.CODE[i]);
+        }
+    }
+
     construct {
         for (int i = 0; i < game.number_of_colors; i++) {
-            var color = new Gdk.Pixbuf (Gdk.Colorspace.RGB, true, 8, 32, 32);
-            color.fill (Colors.CODE[i]);
-            append_pixbuf (color);
+            append_pixbuf (pixbufs[i]);
         }
     }
 }

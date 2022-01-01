@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -40,25 +40,43 @@ public class Sage.Game : Object {
     public signal void game_reset_started ();
     public signal void game_reset_finished ();
 
-    private Settings state;
+    private Store store;
     private Gee.List<int> code;
 
-    public Game (Settings state) {
-        this.state = state;
+    public Game (Store store) {
+        this.store = store;
         link_to_state ();
     }
 
     private void link_to_state () {
-        var flags = GLib.SettingsBindFlags.DEFAULT;
-        state.bind ("max-guesses", this, "max-guesses", flags);
-        state.bind ("code-length", this, "code-length", flags);
-        state.bind ("number-of-colors", this, "number-of-colors", flags);
-        state.bind ("current-turn", this, "current-turn", flags);
-        state.bind ("can-validate", this, "can-validate", flags);
+        code_length = store.get_int ("code-length");
+        notify["code-length"].connect (() => {
+            store.set_int ("code-length", code_length);
+        });
 
-        read_code_from (state.get_value ("code"));
-        read_hints_from (state.get_value ("hints"));
-        read_guesses_from (state.get_value ("guesses"));
+        number_of_colors = store.get_int ("number-of-colors");
+        notify["number-of-colors"].connect (() => {
+            store.set_int ("number-of-colors", number_of_colors);
+        });
+
+        max_guesses = store.get_int ("max-guesses");
+        notify["max-guesses"].connect (() => {
+            store.set_int ("max-guesses", max_guesses);
+        });
+
+        current_turn = store.get_int ("current-turn");
+        notify["current-turn"].connect (() => {
+            store.set_int ("current-turn", current_turn);
+        });
+
+        can_validate = store.get_boolean ("can-validate");
+        notify["can-validate"].connect (() => {
+            store.set_boolean ("can-validate", can_validate);
+        });
+
+        read_code_from (store.get_value ("code"));
+        read_hints_from (store.get_value ("hints"));
+        read_guesses_from (store.get_value ("guesses"));
     }
 
     private void read_code_from (Variant variant) {
@@ -119,6 +137,18 @@ public class Sage.Game : Object {
         game_reset_started ();
         reset_game_state ();
         game_reset_finished ();
+    }
+
+    public void quit () {
+        current_turn = 0;
+        help_tour_step = 0;
+        can_validate = false;
+        var guesses_v = new Variant.array (new VariantType ("ai"), {});
+        store.set_value ("guesses", guesses_v);
+        var code_v = new Variant.array (new VariantType ("i"), {});
+        store.set_value ("code", code_v);
+        var hints_v = new Variant.array (new VariantType ("(ii)"), {});
+        store.set_value ("hints", hints_v);
     }
 
     public void reconfigure (int code_length, int number_of_colors) {
@@ -241,7 +271,7 @@ public class Sage.Game : Object {
         }
 
         var code_v = new Variant.array (new VariantType ("i"), elements);
-        state.set_value ("code", code_v);
+        store.set_value ("code", code_v);
     }
 
     private void store_hints () {
@@ -255,7 +285,7 @@ public class Sage.Game : Object {
         }
 
         var hints_v = new Variant.array (new VariantType ("(ii)"), elements);
-        state.set_value ("hints", hints_v);
+        store.set_value ("hints", hints_v);
     }
 
     private void store_guesses () {
@@ -271,7 +301,7 @@ public class Sage.Game : Object {
         }
 
         var guesses_v = new Variant.array (new VariantType ("ai"), outer_els);
-        state.set_value ("guesses", guesses_v);
+        store.set_value ("guesses", guesses_v);
     }
 
     public void toggle_help_tour () {

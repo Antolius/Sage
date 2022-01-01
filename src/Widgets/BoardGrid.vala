@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 Josip Antoliš. (https://josipantolis.from.hr)
+* Copyright 2022 Josip Antoliš. (https://josipantolis.from.hr)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -38,7 +38,7 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
     }
 
     private void reset () {
-        get_children ().foreach (remove);
+        @foreach (child => child.destroy ());
         current_color = 0;
     }
 

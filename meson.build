@@ -17,6 +17,7 @@ executable(
     'src' / 'Game.vala',
     'src' / 'Hint.vala',
     'src' / 'MainWindow.vala',
+    'src' / 'Store.vala',
     'src' / 'Widgets' / 'BoardGrid.vala',
     'src' / 'Widgets' / 'ColorPickerButton.vala',
     'src' / 'Widgets' / 'Colors.vala',
