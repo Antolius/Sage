@@ -38,8 +38,9 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
 
     construct {
         margin_end = 8;
-        margin_top = 8;
-        margin_bottom = 8;
+        halign = Gtk.Align.END;
+        hexpand = true;
+        valign = Gtk.Align.CENTER;
         sensitive = false;
         always_show_image = true;
         visible = false;

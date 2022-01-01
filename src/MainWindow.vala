@@ -32,8 +32,6 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             app: application,
             game: new Game (application.state),
             application: application,
-            height_request: 640,
-            width_request: 420,
             resizable: false,
             title: _("Sage")
         );
@@ -42,7 +40,6 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     static construct {
         load_style ();
     }
-
 
     private static void load_style () {
         var provider = new Gtk.CssProvider ();
@@ -112,7 +109,7 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             if (response_id == Gtk.ResponseType.ACCEPT) {
                 game.reset ();
             } else {
-                game.reset ();
+                game.quit ();
                 application.quit ();
             }
 

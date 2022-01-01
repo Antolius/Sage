@@ -36,11 +36,20 @@ public class Sage.Widgets.HelpPopover : Gtk.Popover {
     private static string get_help_text_for (int stop) {
         switch (stop) {
             case Game.GUESS_HELP:
-                return _("Try to match the secret code by coloring pins. All pins in the row need to be colored, and several pins can share the same color. As the game progresses, you'll gain more insight, but at first it's ok to pick a couple of colors at random.");
+                return _("Try to match the secret code by coloring pins. All " +
+                "pins in the row need to be colored, and several pins can " +
+                "share the same color. As the game progresses, you'll gain " +
+                "more insight, but at first it's ok to pick a couple of " +
+                "colors at random.");
             case Game.VALIDATE_HELP:
-                return _("After coloring all pins in the row, you can compare it with the secret code.");
+                return _("After coloring all pins in the row, you can compare" +
+                " it with the secret code.");
             case Game.HINT_HELP:
-                return _("You received at most one hint for each pin. Now you need to figure out which hint corresponds to which pin. As you play, you'll submit more rows for validation, so make sure to consider all their hints. Remember: secret code remains the same throughout the game!");
+                return _("You received at most one hint for each pin. Now you" +
+                " need to figure out which hint corresponds to which pin. As " +
+                "you play, you'll submit more rows for validation, so make " +
+                "sure to consider all their hints. Remember: secret code " +
+                "remains the same throughout the game!");
             default:
                 return "";
         }
