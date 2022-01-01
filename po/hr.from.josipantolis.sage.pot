@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hr.from.josipantolis.sage\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-30 00:57+0100\n"
+"POT-Creation-Date: 2022-01-02 00:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/sage.appdata.xml.in:4 data/sage.desktop.in:6 src/MainWindow.vala:38
+#: data/sage.appdata.xml.in:6 data/sage.desktop.in:6 src/MainWindow.vala:36
 msgid "Sage"
 msgstr ""
 
-#: data/sage.appdata.xml.in:5
+#: data/sage.appdata.xml.in:7
 msgid "Break the code, show your mastery"
 msgstr ""
 
-#: data/sage.appdata.xml.in:11
-msgid "Guess random combination in as few attepts as possible."
+#: data/sage.appdata.xml.in:9
+msgid ""
+"Guess the secret color code in as few attempts as possible. It's more fun "
+"than it sounds!"
 msgstr ""
 
-#: data/sage.appdata.xml.in:13
+#: data/sage.appdata.xml.in:18
+msgid "Initial release, bringing you:"
+msgstr ""
+
+#: data/sage.appdata.xml.in:20
+msgid "A help tour, to guide you along your first code breaking steps."
+msgstr ""
+
+#: data/sage.appdata.xml.in:21
+msgid "Classic mode, for a timeless code breaking experience."
+msgstr ""
+
+#: data/sage.appdata.xml.in:22
+msgid "Advanced mode, to challenge your inner sage."
+msgstr ""
+
+#: data/sage.appdata.xml.in:33
 msgid "Josip Antoliš"
+msgstr ""
+
+#: data/sage.appdata.xml.in:40
+msgid "Classic game in progress, showcasing the default style"
+msgstr ""
+
+#: data/sage.appdata.xml.in:44
+msgid "Advanced game with an active help tour showcasing in dark style"
 msgstr ""
 
 #: data/sage.desktop.in:7
@@ -39,10 +65,14 @@ msgid "Code Breaking Game"
 msgstr ""
 
 #: data/sage.desktop.in:8
-msgid "Guess a secret combination"
+msgid "Have fun guessing a secret code"
 msgstr ""
 
-#: data/sage.desktop.in:11
+#: data/sage.desktop.in:10
+msgid "Code;Breaking;Master;Puzzle;"
+msgstr ""
+
+#: data/sage.desktop.in:12
 msgid "hr.from.josipantolis.sage"
 msgstr ""
 
@@ -70,19 +100,19 @@ msgstr ""
 msgid "Play Again"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:46
+#: src/Widgets/HeaderBar.vala:40
 msgid "Classic"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:47
+#: src/Widgets/HeaderBar.vala:41
 msgid "Advanced"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:81
+#: src/Widgets/HeaderBar.vala:71
 msgid "Start a new game"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:90
+#: src/Widgets/HeaderBar.vala:80
 msgid "Show help"
 msgstr ""
 
@@ -94,12 +124,12 @@ msgid ""
 "of colors at random."
 msgstr ""
 
-#: src/Widgets/HelpPopover.vala:41
+#: src/Widgets/HelpPopover.vala:45
 msgid ""
 "After coloring all pins in the row, you can compare it with the secret code."
 msgstr ""
 
-#: src/Widgets/HelpPopover.vala:43
+#: src/Widgets/HelpPopover.vala:48
 msgid ""
 "You received at most one hint for each pin. Now you need to figure out which "
 "hint corresponds to which pin. As you play, you'll submit more rows for "
@@ -115,6 +145,6 @@ msgstr ""
 msgid "Correct color on a wrong position"
 msgstr ""
 
-#: src/Widgets/ValidateRowButton.vala:46
+#: src/Widgets/ValidateRowButton.vala:47
 msgid "Compare with code"
 msgstr ""
