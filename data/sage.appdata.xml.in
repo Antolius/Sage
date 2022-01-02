@@ -51,11 +51,11 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/antolius/sage/1.0.0/data/screenshots/classic.png</image>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.0.1/data/screenshots/classic.png</image>
       <caption>Classic game in progress, showcasing the default style</caption>
     </screenshot>
       <screenshot>
-        <image>https://raw.githubusercontent.com/antolius/sage/1.0.0/data/screenshots/advanced.png</image>
+        <image>https://raw.githubusercontent.com/antolius/sage/1.0.1/data/screenshots/advanced.png</image>
         <caption>Advanced game with an active help tour showcasing the dark style</caption>
       </screenshot>
   </screenshots>
