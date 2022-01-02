@@ -5,7 +5,7 @@ A code breaking game made for [elementary OS](https://elementary.io/).
 
 |![Default style screenshot](data/screenshots/classic.png)|![Dark style screenshot](data/screenshots/advanced.png)          |
 |---------------------------------------------------------|-----------------------------------------------------------------|
-| Classic game in progress, showcasing the default style  | Advanced game with an active help tour showcasing in dark style |
+| Classic game in progress, showcasing the default style  | Advanced game with an active help tour showcasing the dark style |
 
 ## What's up with that name?
 
