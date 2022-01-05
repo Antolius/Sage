@@ -3,6 +3,11 @@
 
 A code breaking game made for [elementary OS](https://elementary.io/).
 
+[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/hr.from.josipantolis.sage/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](COPYING)
+[![Build](https://github.com/Antolius/Sage/actions/workflows/ci.yml/badge.svg)](https://github.com/Antolius/Sage/actions)
+[![GitHub release](https://img.shields.io/github/v/release/Antolius/Sage)](https://github.com/Antolius/Sage/releases)
+
 |![Default style screenshot](data/screenshots/classic.png)|![Dark style screenshot](data/screenshots/advanced.png)          |
 |---------------------------------------------------------|-----------------------------------------------------------------|
 | Classic game in progress, showcasing the default style  | Advanced game with an active help tour showcasing the dark style |
@@ -21,9 +26,17 @@ I guess you need to be a sage in order to master this game. Or you'll turn into 
 - Next, I was heavily influenced by [@igordsm's](https://github.com/igordsm) recent [blog posts](https://dev.to/igordsm/vala-reactive-programming-2pf4) on reactive programming in Vala. Kudos to Igor for thinking through and eloquently elaborating on this design pattern!
 - Lastly, elementary app development wouldn't be possible without the [elementary team](https://elementary.io/team). So kudos to [Danielle](https://github.com/danrabbit) and [Cassidy](https://github.com/cassidyjames) for running the show and the entire team for making elementary OS such a nice platform to develop for!
 
-## On to the business
+## How to install
 
-Sage will, hopefully, soon be published on [AppCenter](https://appcenter.elementary.io). Until then, and especially if you want to mess around with the code or even contribute to it, you can build it locally. You can find detailed instructions for setting up local environment in [elementary developer docs](https://docs.elementary.io/develop/writing-apps/the-basic-setup).
+Sage is packaged with [Flatpak](https://www.flatpak.org/) and published on elementary OS AppCenter. If you are running some other Linux distribution you can download the `flatpakref` file from [elementary repo](https://appcenter.elementary.io/hr.from.josipantolis.sage.flatpakref) and install it either using a graphical package manager, or from terminal with:
+
+```sh
+flatpak install --from ./hr.from.josipantolis.sage.flatpakref
+```
+
+## How to build from source
+
+If you want to you can build Sage locally, from source. You can find detailed instructions for setting up local environment in [elementary developer docs](https://docs.elementary.io/develop/writing-apps/the-basic-setup).
 
 ### Build it with meson
 
