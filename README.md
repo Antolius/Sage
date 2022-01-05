@@ -28,7 +28,7 @@ I guess you need to be a sage in order to master this game. Or you'll turn into 
 
 ## How to install
 
-Sage is packaged with [Flatpak](https://www.flatpak.org/) and published on elementary OS AppCenter. If you are running some other Linux distribution you can download the `flatpakref` file from [elementary repo](https://appcenter.elementary.io/hr.from.josipantolis.sage.flatpakref) and install it either using a graphical package manager, or from terminal with:
+Sage is packaged with [Flatpak](https://www.flatpak.org/) and published on elementary OS AppCenter. If you are running some other Linux distribution you can download the `flatpakref` file from [elementary repo](https://flatpak.elementary.io/repo/appstream/hr.from.josipantolis.sage.flatpakref) and install it either using a graphical package manager, or from terminal with:
 
 ```sh
 flatpak install --from ./hr.from.josipantolis.sage.flatpakref
