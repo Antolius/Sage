@@ -1,4 +1,4 @@
-<img align="left" width="64" height="64" src="data/icons/64.svg">
+<img align="left" width="64" height="64" src="data/icons/64/hr.from.josipantolis.sage.svg">
 <h1>Sage</h1>
 
 A code breaking game made for [elementary OS](https://elementary.io/).
@@ -94,6 +94,6 @@ ninja hr.from.josipantolis.sage-update-po
 
 ## License
 
-[GNU GPLv3](COPYING)
+[GNU GPLv3](LICENSE)
 
 Copyright © 2022 Josip Antoliš, josip.antolis@protonmail.com.
