@@ -3,77 +3,22 @@
 # This file is distributed under the same license as the hr.from.josipantolis.sage package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/Widgets/HintsGrid.vala:47
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: hr.from.josipantolis.sage\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-02 00:25+0100\n"
+"POT-Creation-Date: 2022-01-21 11:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/sage.appdata.xml.in:6 data/sage.desktop.in:6 src/MainWindow.vala:36
+#: src/MainWindow.vala:36
 msgid "Sage"
-msgstr ""
-
-#: data/sage.appdata.xml.in:7
-msgid "Break the code, show your mastery"
-msgstr ""
-
-#: data/sage.appdata.xml.in:9
-msgid ""
-"Guess the secret color code in as few attempts as possible. It's more fun "
-"than it sounds!"
-msgstr ""
-
-#: data/sage.appdata.xml.in:18
-msgid "Initial release, bringing you:"
-msgstr ""
-
-#: data/sage.appdata.xml.in:20
-msgid "A help tour, to guide you along your first code breaking steps."
-msgstr ""
-
-#: data/sage.appdata.xml.in:21
-msgid "Classic mode, for a timeless code breaking experience."
-msgstr ""
-
-#: data/sage.appdata.xml.in:22
-msgid "Advanced mode, to challenge your inner sage."
-msgstr ""
-
-#: data/sage.appdata.xml.in:33
-msgid "Josip Antoliš"
-msgstr ""
-
-#: data/sage.appdata.xml.in:40
-msgid "Classic game in progress, showcasing the default style"
-msgstr ""
-
-#: data/sage.appdata.xml.in:44
-msgid "Advanced game with an active help tour showcasing in dark style"
-msgstr ""
-
-#: data/sage.desktop.in:7
-msgid "Code Breaking Game"
-msgstr ""
-
-#: data/sage.desktop.in:8
-msgid "Have fun guessing a secret code"
-msgstr ""
-
-#: data/sage.desktop.in:10
-msgid "Code;Breaking;Master;Puzzle;"
-msgstr ""
-
-#: data/sage.desktop.in:12
-msgid "hr.from.josipantolis.sage"
 msgstr ""
 
 #: src/Widgets/EndGameDialog.vala:25

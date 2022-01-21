@@ -44,7 +44,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
             icons[i] = new Gtk.Image () {
                 gicon = new ThemedIcon ("emblem-disabled"),
                 pixel_size = 22,
-                tooltip_text = _("")
+                tooltip_text = ""
             };
 
             attach (icons[i], i / 2, i % 2);
