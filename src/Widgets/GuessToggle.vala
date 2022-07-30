@@ -40,7 +40,7 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
         margin_top = 8;
         margin_bottom = 8;
         sensitive = row == game.current_turn;
-        get_style_context ().add_class ("circular");
+        add_css_class (Granite.STYLE_CLASS_CIRCULAR);
         update_button_activity ();
 
         toggled.connect (handle_toggle);
@@ -63,20 +63,14 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
             clear_color_class ();
         } else {
             active = true;
-            set_color_class (guess);
+            add_css_class (Colors.STYLE_CLASS[guess]);
         }
     }
 
     private void clear_color_class () {
-        var ctx = get_style_context ();
         foreach (string color_class in Colors.STYLE_CLASS) {
-            ctx.remove_class (color_class);
+            remove_css_class (color_class);
         }
-    }
-
-    private void set_color_class (int color_idx) {
-        var color_class = Colors.STYLE_CLASS[color_idx];
-        get_style_context ().add_class (color_class);
     }
 
     private void handle_toggle () {

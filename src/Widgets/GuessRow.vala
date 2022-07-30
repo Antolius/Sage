@@ -35,7 +35,7 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
 
     construct {
         column_spacing = 8;
-        get_style_context ().add_class ("circular");
+        add_css_class (Granite.STYLE_CLASS_CIRCULAR);
 
         update_row_class ();
         game.notify["current-turn"].connect (update_row_class);
@@ -59,11 +59,10 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
     }
 
     private void update_row_class () {
-        var ctx = get_style_context ();
         if (game.current_turn == row) {
-            ctx.add_class (Granite.STYLE_CLASS_CARD);
+            add_css_class (Granite.STYLE_CLASS_CARD);
         } else {
-            ctx.remove_class (Granite.STYLE_CLASS_CARD);
+            remove_css_class (Granite.STYLE_CLASS_CARD);
         }
     }
 
