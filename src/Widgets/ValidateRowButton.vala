@@ -41,7 +41,7 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         sensitive = false;
         visible = false;
         tooltip_text = _("Compare with code");
-        get_style_context ().add_class ("circular");
+        add_css_class (Granite.STYLE_CLASS_CIRCULAR);
 
         clicked.connect (() => game.validate_current_row ());
         update_validate_button ();
