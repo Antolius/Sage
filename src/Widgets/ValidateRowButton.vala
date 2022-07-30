@@ -26,23 +26,19 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
     private Gtk.Popover? help_popover;
 
     public ValidateRowButton (Game game, int row) {
-        Object (
-            game: game,
-            row: row,
-            image: new Gtk.Image () {
-                gicon = new ThemedIcon ("insert-object-symbolic"),
-                pixel_size = 24
-            }
-        );
+        Object (game: game, row: row);
     }
 
     construct {
+        icon_name = "insert-object-symbolic";
+        ((Gtk.Image) child).pixel_size = 24;
         margin_end = 8;
+        height_request = 24;
+        width_request = 24;
         halign = Gtk.Align.END;
         hexpand = true;
         valign = Gtk.Align.CENTER;
         sensitive = false;
-        always_show_image = true;
         visible = false;
         tooltip_text = _("Compare with code");
         get_style_context ().add_class ("circular");
@@ -51,13 +47,12 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         update_validate_button ();
         game.notify["can-validate"].connect (update_validate_button);
         game.notify["help-tour-step"].connect (update_help_popover);
-    }
 
-    public override void show_all () {
-        var is_on_turn = row == game.current_turn;
-        if (is_on_turn) {
-            base.show_all ();
-        }
+        destroy.connect (() => {
+            if (help_popover != null) {
+                help_popover.unparent ();
+            }
+        });
     }
 
     private void update_validate_button () {
@@ -71,15 +66,13 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         var validate_help = game.help_tour_step == Game.VALIDATE_HELP;
         if (on_turn && validate_help) {
             if (help_popover == null) {
-                help_popover = new HelpPopover (this, Game.VALIDATE_HELP);
-                help_popover.show_all ();
+                help_popover = new HelpPopover (Game.VALIDATE_HELP);
+                help_popover.set_parent (this);
             }
 
             help_popover.popup ();
         } else if (help_popover != null) {
             help_popover.popdown ();
-            help_popover.destroy ();
-            help_popover = null;
         }
     }
 }

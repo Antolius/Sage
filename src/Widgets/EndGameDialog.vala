@@ -39,9 +39,10 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
     }
 
     construct {
+        modal = true;
         add_button (_("Quit"), Gtk.ResponseType.CANCEL);
         var replay = add_button (_("Play Again"), Gtk.ResponseType.ACCEPT);
-        replay.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        replay.get_style_context ().add_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
         set_default_response (Gtk.ResponseType.ACCEPT);
     }
 
@@ -61,7 +62,10 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
             var btn = new Gtk.ToggleButton () {
                 height_request = 32,
                 width_request = 32,
-                margin = 8,
+                margin_bottom = 8,
+                margin_end = 8,
+                margin_start = 8,
+                margin_top = 8,
                 hexpand = false,
                 sensitive = false,
             };
@@ -72,7 +76,6 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
             row.attach (btn, i, 0);
         }
 
-        row.show_all ();
-        custom_bin.add (row);
+        custom_bin.append (row);
     }
 }

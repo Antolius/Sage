@@ -232,11 +232,13 @@ public class Sage.Game : Object {
         store_hints ();
 
         if (hint.correct_positions_count == code_length) {
+            help_tour_step = NO_HELP;
             game_over (true, code.to_array ());
             return;
         }
 
         if (current_turn == max_guesses - 1) {
+            help_tour_step = NO_HELP;
             game_over (false, code.to_array ());
             return;
         }

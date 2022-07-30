@@ -18,14 +18,10 @@
 *
 */
 
-public class Sage.MainWindow : Hdy.ApplicationWindow {
+public class Sage.MainWindow : Gtk.ApplicationWindow {
 
     public Game game { get; construct; }
     public Store store { get; construct; }
-
-    private Gtk.Grid grid;
-    private Widgets.BoardGrid board;
-    private uint configure_id;
 
     public MainWindow (Application application, Store store, Game game) {
         Object (
@@ -44,58 +40,22 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
     private static void load_style () {
         var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("hr/from/josipantolis/sage/style.css");
-        var screen = Gdk.Screen.get_default ();
-        Gtk.StyleContext.add_provider_for_screen (
-            screen,
+        var display = Gdk.Display.get_default ();
+        Gtk.StyleContext.add_provider_for_display (
+            display,
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
     }
 
     construct {
-        link_position_to_state ();
         create_layout ();
         listen_to_game_over ();
-        show_all ();
-    }
-
-    private void link_position_to_state () {
-        int window_x, window_y;
-        var pos = store.get_value ("window-position");
-        pos.get ("(ii)", out window_x, out window_y);
-        if (window_x != -1 || window_y != -1) {
-            move (window_x, window_y);
-        }
-    }
-
-    public override bool configure_event (Gdk.EventConfigure event) {
-        if (configure_id != 0) {
-            GLib.Source.remove (configure_id);
-        }
-
-        configure_id = Timeout.add (100, () => {
-            configure_id = 0;
-            int window_x, window_y;
-            get_position (out window_x, out window_y);
-            var pos = new Variant.tuple ({
-                new Variant.int32 (window_x),
-                new Variant.int32 (window_y)
-            });
-
-            store.set_value ("window-position", pos);
-            return false;
-        });
-
-        return base.configure_event (event);
     }
 
     private void create_layout () {
-        grid = new Gtk.Grid ();
-        var header_bar = new Widgets.HeaderBar (game);
-        grid.attach (header_bar, 0, 0);
-        board = new Widgets.BoardGrid (game);
-        grid.attach (board, 0, 1);
-        add (grid);
+        set_titlebar (new Widgets.HeaderBar (game));
+        child = new Widgets.BoardGrid (game);
     }
 
     private void listen_to_game_over () {
@@ -110,15 +70,18 @@ public class Sage.MainWindow : Hdy.ApplicationWindow {
             dialog.transient_for = this;
             dialog.display_code (code);
 
-            var response_id = dialog.run ();
-            if (response_id == Gtk.ResponseType.ACCEPT) {
-                game.reset ();
-            } else {
-                game.quit ();
-                application.quit ();
-            }
+            dialog.response.connect ((response_id) => {
+                if (response_id == Gtk.ResponseType.ACCEPT) {
+                    game.reset ();
+                } else {
+                    game.quit ();
+                    application.quit ();
+                }
 
-            dialog.destroy ();
+                dialog.destroy ();
+            });
+
+            dialog.show ();
         });
     }
 }
