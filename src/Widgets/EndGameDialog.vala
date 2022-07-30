@@ -39,6 +39,7 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
     }
 
     construct {
+        modal = true;
         add_button (_("Quit"), Gtk.ResponseType.CANCEL);
         var replay = add_button (_("Play Again"), Gtk.ResponseType.ACCEPT);
         replay.get_style_context ().add_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);

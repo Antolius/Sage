@@ -31,6 +31,7 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
 
     construct {
         icon_name = "insert-object-symbolic";
+        ((Gtk.Image) child).pixel_size = 24;
         margin_end = 8;
         height_request = 24;
         width_request = 24;

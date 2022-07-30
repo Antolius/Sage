@@ -40,8 +40,8 @@ public class Sage.Widgets.ColorPickerBox : Gtk.Box {
             var btn = new Gtk.ToggleButton () {
                 active = btn_group == null,
                 child = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-                    height_request = 30,
-                    width_request = 30
+                    height_request = 33,
+                    width_request = 33
                 }
             };
             btn.child.add_css_class (Colors.STYLE_CLASS[i]);
