@@ -22,15 +22,11 @@ public class Sage.Widgets.HelpPopover : Gtk.Popover {
 
     public string help_text { get; construct; }
 
-    public HelpPopover (
-        Gtk.Widget relative_to,
-        int help_tour_stop
-    ) {
+    public HelpPopover (int help_tour_stop) {
         Object (
-            // TODO: figure this out in GTK4
-            // relative_to: relative_to,
             help_text: get_help_text_for (help_tour_stop),
-            position: Gtk.PositionType.TOP
+            position: Gtk.PositionType.TOP,
+            autohide: false
         );
     }
 

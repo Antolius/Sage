@@ -88,14 +88,13 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         var hint_help = game.help_tour_step == Game.HINT_HELP;
         if (on_next_turn && hint_help) {
             if (help_popover == null) {
-                help_popover = new HelpPopover (this, Game.HINT_HELP);
+                help_popover = new HelpPopover (Game.HINT_HELP);
+                help_popover.set_parent (this);
             }
 
             help_popover.popup ();
         } else if (help_popover != null) {
             help_popover.popdown ();
-            help_popover.destroy ();
-            help_popover = null;
         }
     }
 }

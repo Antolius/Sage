@@ -72,14 +72,13 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
         var guess_help = game.help_tour_step == Game.GUESS_HELP;
         if (on_turn && guess_help) {
             if (help_popover == null) {
-                help_popover = new HelpPopover (this, Game.GUESS_HELP);
+                help_popover = new HelpPopover (Game.GUESS_HELP);
+                help_popover.set_parent (this);
             }
 
             help_popover.popup ();
         } else if (help_popover != null) {
             help_popover.popdown ();
-            help_popover.destroy ();
-            help_popover = null;
         }
     }
 }

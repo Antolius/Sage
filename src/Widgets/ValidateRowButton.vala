@@ -46,6 +46,12 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         update_validate_button ();
         game.notify["can-validate"].connect (update_validate_button);
         game.notify["help-tour-step"].connect (update_help_popover);
+
+        destroy.connect (() => {
+            if (help_popover != null) {
+                help_popover.unparent ();
+            }
+        });
     }
 
     private void update_validate_button () {
@@ -59,14 +65,13 @@ public class Sage.Widgets.ValidateRowButton : Gtk.Button {
         var validate_help = game.help_tour_step == Game.VALIDATE_HELP;
         if (on_turn && validate_help) {
             if (help_popover == null) {
-                help_popover = new HelpPopover (this, Game.VALIDATE_HELP);
+                help_popover = new HelpPopover (Game.VALIDATE_HELP);
+                help_popover.set_parent (this);
             }
 
             help_popover.popup ();
         } else if (help_popover != null) {
             help_popover.popdown ();
-            help_popover.destroy ();
-            help_popover = null;
         }
     }
 }
