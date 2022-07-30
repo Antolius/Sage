@@ -25,7 +25,10 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
 
     public BoardGrid (Game game) {
         Object (
-            margin: 12,
+            margin_bottom: 12,
+            margin_end: 12,
+            margin_start: 12,
+            margin_top: 12,
             row_spacing: 12,
             game: game
         );
@@ -38,7 +41,12 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
     }
 
     private void reset () {
-        @foreach (child => child.destroy ());
+        var row = get_first_child ();
+        while (row != null) {
+            var next = row.get_next_sibling ();
+            remove (row);
+            row = next;
+        }
         current_color = 0;
     }
 
@@ -50,9 +58,8 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
             attach (row, 0, i);
         }
 
-        var color_picker = new ColorPickerButton (game);
+        var color_picker = new ColorPickerBox (game);
         bind_property ("current_color", color_picker, "selected", bind_flags);
         attach (color_picker, 0, game.max_guesses);
-        show_all ();
     }
 }

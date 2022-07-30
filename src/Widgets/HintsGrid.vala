@@ -65,8 +65,6 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
             } else {
                 mark_as_a_miss (icons[i]);
             }
-
-            icons[i].show_all ();
         }
     }
 
@@ -91,7 +89,6 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         if (on_next_turn && hint_help) {
             if (help_popover == null) {
                 help_popover = new HelpPopover (this, Game.HINT_HELP);
-                help_popover.show_all ();
             }
 
             help_popover.popup ();

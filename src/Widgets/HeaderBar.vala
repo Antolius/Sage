@@ -18,7 +18,7 @@
 *
 */
 
-public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
+public class Sage.Widgets.HeaderBar : Gtk.Box {
 
     public Game game { get; construct; }
 
@@ -27,24 +27,36 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
     }
 
     construct {
-        has_subtitle = false;
-        show_close_button = true;
-        decoration_layout = "close";
-        custom_title = create_mode_switcher ();
-        pack_start (create_new_game_button ());
-        pack_end (create_help_button ());
+        var bar = new Gtk.HeaderBar () {
+            hexpand = true,
+            show_title_buttons = true,
+            decoration_layout = "close",
+            title_widget = create_mode_switcher ()
+        };
+
+        bar.pack_start (create_new_game_button ());
+        bar.pack_end (create_help_button ());
+
+        append (bar);
     }
 
-    private Granite.Widgets.ModeButton create_mode_switcher () {
-        var btn = new Granite.Widgets.ModeButton ();
-        btn.append_text (_("Classic"));
-        btn.append_text (_("Advanced"));
-        btn.selected = determine_mode_from_game ();
-        btn.mode_changed.connect (() => {
-            switch_mode_to (btn.selected);
+    private Gtk.Box create_mode_switcher () {
+        var btns = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        btns.add_css_class (Granite.STYLE_CLASS_LINKED);
+
+        var classic = new Gtk.ToggleButton.with_label (_("Classic"));
+        classic.active = determine_mode_from_game () == 0;
+        btns.append (classic);
+        var advanced = new Gtk.ToggleButton.with_label (_("Advanced"));
+        advanced.active = determine_mode_from_game () == 1;
+        advanced.set_group (classic);
+        btns.append (advanced);
+
+        classic.toggled.connect (() => {
+            switch_mode_to (classic.active ? 0 : 1);
         });
 
-        return btn;
+        return btns;
     }
 
     private int determine_mode_from_game () {
@@ -65,8 +77,7 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
 
     private Gtk.Button create_new_game_button () {
         var btn = new Gtk.Button.from_icon_name (
-            "view-refresh-symbolic",
-            Gtk.IconSize.SMALL_TOOLBAR
+            "view-refresh-symbolic"
         ) {
             tooltip_text = _("Start a new game")
         };
@@ -78,11 +89,7 @@ public class Sage.Widgets.HeaderBar : Hdy.HeaderBar {
     private Gtk.ToggleButton create_help_button () {
         var btn = new Gtk.ToggleButton () {
             tooltip_text = _("Show help"),
-            always_show_image = true,
-            image = new Gtk.Image () {
-                gicon = new ThemedIcon ("help-contents-symbolic"),
-                pixel_size = 16
-            }
+            icon_name = "help-contents-symbolic"
         };
 
         var id = btn.clicked.connect (game.toggle_help_tour);

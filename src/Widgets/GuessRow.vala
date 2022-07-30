@@ -73,7 +73,6 @@ public class Sage.Widgets.GuessRow : Gtk.Grid {
         if (on_turn && guess_help) {
             if (help_popover == null) {
                 help_popover = new HelpPopover (this, Game.GUESS_HELP);
-                help_popover.show_all ();
             }
 
             help_popover.popup ();

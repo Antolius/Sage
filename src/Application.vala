@@ -37,14 +37,13 @@ public class Sage.Application : Gtk.Application {
             var store = new Store (settings);
             var game = new Game (store);
             var window = new MainWindow (this, store, game);
-            window.show ();
+            window.present ();
             shutdown.connect (() => store.shutdown_gracefully ());
         }
     }
 
     public override void startup () {
         base.startup ();
-        Hdy.init ();
         foce_elementary_style ();
         link_dark_mode_settings ();
     }

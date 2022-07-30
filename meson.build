@@ -19,7 +19,7 @@ executable(
     'src' / 'MainWindow.vala',
     'src' / 'Store.vala',
     'src' / 'Widgets' / 'BoardGrid.vala',
-    'src' / 'Widgets' / 'ColorPickerButton.vala',
+    'src' / 'Widgets' / 'ColorPickerBox.vala',
     'src' / 'Widgets' / 'Colors.vala',
     'src' / 'Widgets' / 'EndGameDialog.vala',
     'src' / 'Widgets' / 'GuessRow.vala',
@@ -30,9 +30,8 @@ executable(
     'src' / 'Widgets' / 'ValidateRowButton.vala',
     dependencies: [
         dependency('gee-0.8'),
-        dependency('gtk+-3.0'),
-        dependency('granite'),
-        dependency('libhandy-1'),
+        dependency('gtk4'),
+        dependency('granite-7')
     ],
     install: true
 )
