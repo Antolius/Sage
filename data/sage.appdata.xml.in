@@ -19,6 +19,15 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <releases>
+    <release version="1.1.0" date="2022-07-31">
+      <description>
+        <p>Feature update:</p>
+        <ul>
+          <li>A color blindness mode is introduced. You no longer need to rely on pin colors to solve the puzzle.</li>
+          <li>Upgraded to GTk4 framework and modernized the look of the app.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2022-06-27">
       <description>
         <p>Maintenance Update:</p>
@@ -59,15 +68,15 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/classic.png</image>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.1.0/data/screenshots/classic.png</image>
       <caption>Classic game in progress, showcasing the default style</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/advanced.png</image>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.1.0/data/screenshots/advanced.png</image>
       <caption>Advanced game with an active help tour showcasing the dark style</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/color_blind.png</image>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.1.0/data/screenshots/color_blind.png</image>
       <caption>Color blind mode, showcasing numbered pins and hint icons</caption>
     </screenshot>
   </screenshots>
