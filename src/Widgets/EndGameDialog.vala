@@ -38,7 +38,7 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
             "face-angry",
             Gtk.ButtonsType.NONE
         );
-        
+
         this.color_blind_mode = color_blind_mode;
     }
 
