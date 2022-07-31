@@ -41,5 +41,10 @@
       <summary>Can validate</summary>
       <description>Can the player submit current row to validation</description>
     </key>
+    <key name="color-blind-mode" type="b">
+      <default>false</default>
+      <summary>Color blind mode</summary>
+      <description>Describe pins with shapes in addition to colors</description>
+    </key>
   </schema>
 </schemalist>

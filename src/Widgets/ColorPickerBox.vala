@@ -37,14 +37,19 @@ public class Sage.Widgets.ColorPickerBox : Gtk.Box {
 
         Gtk.ToggleButton btn_group = null;
         for (int i = 0; i < game.number_of_colors; i++) {
+            var label = new Gtk.Label (
+                game.color_blind_mode ? "%d".printf (i + 1) : ""
+            ) {
+                height_request = 33,
+                width_request = 33
+            };
+            label.add_css_class (Colors.STYLE_CLASS[i]);
+
             var btn = new Gtk.ToggleButton () {
                 active = btn_group == null,
-                child = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-                    height_request = 33,
-                    width_request = 33
-                }
+                child = label
             };
-            btn.child.add_css_class (Colors.STYLE_CLASS[i]);
+            btn.add_css_class ("guess");
 
             if (btn_group == null) {
                 btn_group = btn;
@@ -58,6 +63,15 @@ public class Sage.Widgets.ColorPickerBox : Gtk.Box {
                     selected = color_id;
                 }
             });
+
+            game.notify["color-blind-mode"].connect (() => {
+                if (game.color_blind_mode) {
+                    label.label = "%d".printf (color_id + 1);
+                } else {
+                    label.label = "";
+                }
+            });
+
             append (btn);
         }
     }

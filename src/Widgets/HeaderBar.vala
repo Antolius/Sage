@@ -18,7 +18,7 @@
 *
 */
 
-public class Sage.Widgets.HeaderBar : Gtk.Box {
+public class Sage.Widgets.HeaderBar : Gtk.Widget {
 
     public Game game { get; construct; }
 
@@ -27,6 +27,9 @@ public class Sage.Widgets.HeaderBar : Gtk.Box {
     }
 
     construct {
+        layout_manager = new Gtk.BinLayout ();
+        add_css_class ("flat-headerbar");
+
         var bar = new Gtk.HeaderBar () {
             hexpand = true,
             show_title_buttons = true,
@@ -36,8 +39,9 @@ public class Sage.Widgets.HeaderBar : Gtk.Box {
 
         bar.pack_start (create_new_game_button ());
         bar.pack_end (create_help_button ());
+        bar.pack_end (create_accessibility_button ());
 
-        append (bar);
+        bar.set_parent (this);
     }
 
     private Gtk.Box create_mode_switcher () {
@@ -88,7 +92,7 @@ public class Sage.Widgets.HeaderBar : Gtk.Box {
 
     private Gtk.ToggleButton create_help_button () {
         var btn = new Gtk.ToggleButton () {
-            tooltip_text = _("Show help"),
+            tooltip_text = _("Show help tour"),
             icon_name = "help-contents-symbolic"
         };
 
@@ -100,6 +104,20 @@ public class Sage.Widgets.HeaderBar : Gtk.Box {
                 SignalHandler.unblock (btn, id);
             }
         });
+
+        return btn;
+    }
+
+    private Gtk.ToggleButton create_accessibility_button () {
+        var btn = new Gtk.ToggleButton () {
+            tooltip_text = _("Color blind mode"),
+            icon_name = "preferences-desktop-accessibility-symbolic",
+            margin_start = 8,
+            margin_end = 8
+        };
+
+        var bind_flags = BindingFlags.BIDIRECTIONAL | BindingFlags.SYNC_CREATE;
+        game.bind_property ("color-blind-mode", btn, "active", bind_flags);
 
         return btn;
     }

@@ -59,7 +59,7 @@ public class Sage.Widgets.BoardGrid : Gtk.Grid {
         }
 
         var color_picker = new ColorPickerBox (game);
-        bind_property ("current_color", color_picker, "selected", bind_flags);
+        bind_property ("current-color", color_picker, "selected", bind_flags);
         attach (color_picker, 0, game.max_guesses);
     }
 }

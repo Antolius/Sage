@@ -53,6 +53,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
         update_hint_icons ();
         game.notify["hints"].connect (update_hint_icons);
         game.notify["help-tour-step"].connect (update_help_popover);
+        game.notify["color-blind-mode"].connect (update_hint_icons);
     }
 
     private void update_hint_icons () {
@@ -69,12 +70,20 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
     }
 
     private void mark_as_correct_position (Gtk.Image icon) {
-        icon.gicon = new ThemedIcon ("emblem-enabled");
+        if (game.color_blind_mode) {
+            icon.gicon = new ThemedIcon ("emblem-default");
+        } else {
+            icon.gicon = new ThemedIcon ("emblem-enabled");
+        }
         icon.tooltip_text = _("Correct color on a correct position");
     }
 
     private void mark_as_correct_color (Gtk.Image icon) {
-        icon.gicon = new ThemedIcon ("emblem-mixed");
+        if (game.color_blind_mode) {
+            icon.gicon = new ThemedIcon ("dialog-question");
+        } else {
+            icon.gicon = new ThemedIcon ("emblem-mixed");
+        }
         icon.tooltip_text = _("Correct color on a wrong position");
     }
 
