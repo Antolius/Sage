@@ -25,6 +25,8 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
     public int row { get; construct; }
     public int column { get; construct; }
 
+    private int guess { get { return game.guesses[row][column]; } }
+
     public GuessToggle (Game game, int row, int column) {
         Object (
             game: game,
@@ -41,12 +43,14 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
         margin_bottom = 8;
         sensitive = row == game.current_turn;
         add_css_class (Granite.STYLE_CLASS_CIRCULAR);
+        add_css_class ("guess");
         update_button_activity ();
 
         toggled.connect (handle_toggle);
         realize.connect (update_button_sensitivity);
         game.notify["current-turn"].connect (update_button_sensitivity);
         game.notify["guesses"].connect (update_button_activity);
+        game.notify["color-blind-mode"].connect (update_label);
     }
 
     private void update_button_sensitivity () {
@@ -57,13 +61,14 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
     }
 
     private void update_button_activity () {
-        var guess = game.guesses[row][column];
         if (guess == Game.EMPTY_GUESS) {
             active = false;
             clear_color_class ();
+            update_label ();
         } else {
             active = true;
             add_css_class (Colors.STYLE_CLASS[guess]);
+            update_label ();
         }
     }
 
@@ -74,11 +79,18 @@ public class Sage.Widgets.GuessToggle : Gtk.ToggleButton {
     }
 
     private void handle_toggle () {
-        var game_state = game.guesses[row][column];
-        if (active && game_state == Game.EMPTY_GUESS) {
+        if (active && guess == Game.EMPTY_GUESS) {
             game.submit_a_guess (column, current_color);
-        } else if (!active && game_state != Game.EMPTY_GUESS) {
+        } else if (!active && guess != Game.EMPTY_GUESS) {
             game.submit_a_guess (column, Game.EMPTY_GUESS);
+        }
+    }
+
+    private void update_label () {
+        if (game.color_blind_mode && guess != Game.EMPTY_GUESS) {
+            label = "%d".printf (guess + 1);
+        } else {
+            label = null;
         }
     }
 

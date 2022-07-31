@@ -35,6 +35,7 @@ public class Sage.Game : Object {
     public Gee.List<Gee.List<int>> guesses { get; set; }
     public bool can_validate { get; set; }
     public int help_tour_step { get; set; default = 0; }
+    public bool color_blind_mode { get; set; default = false; }
 
     public signal void game_over (bool victory, int[] code);
     public signal void game_reset_started ();
@@ -72,6 +73,11 @@ public class Sage.Game : Object {
         can_validate = store.get_boolean ("can-validate");
         notify["can-validate"].connect (() => {
             store.set_boolean ("can-validate", can_validate);
+        });
+
+        color_blind_mode = store.get_boolean ("color-blind-mode");
+        notify["color-blind-mode"].connect (() => {
+            store.set_boolean ("color-blind-mode", color_blind_mode);
         });
 
         read_code_from (store.get_value ("code"));

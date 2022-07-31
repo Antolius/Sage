@@ -38,6 +38,7 @@ public class Sage.MainWindow : Gtk.ApplicationWindow {
     }
 
     private static void load_style () {
+
         var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("hr/from/josipantolis/sage/style.css");
         var display = Gdk.Display.get_default ();
@@ -46,6 +47,9 @@ public class Sage.MainWindow : Gtk.ApplicationWindow {
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
+
+        Gtk.IconTheme.get_for_display (display)
+            .add_resource_path ("/hr/from/josipantolis/sage");
     }
 
     construct {
@@ -62,9 +66,9 @@ public class Sage.MainWindow : Gtk.ApplicationWindow {
         game.game_over.connect ((victory, code) => {
             Widgets.EndGameDialog dialog;
             if (victory) {
-                dialog = new Widgets.EndGameDialog ();
+                dialog = new Widgets.EndGameDialog (game.color_blind_mode);
             } else {
-                dialog = new Widgets.EndGameDialog.defeat ();
+                dialog = new Widgets.EndGameDialog.defeat (game.color_blind_mode);
             }
 
             dialog.transient_for = this;

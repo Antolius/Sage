@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/hr/from/josipantolis/sage">
+
+    <!--Stylesheet-->
     <file compressed="true">style.css</file>
+
+    <!--Icons-->
+    <file alias="24x24/emblems/full-match.svg" compressed="true" preprocess="xml-stripblanks">icons/full-match-24.svg</file>
+    <file alias="24x24@2/emblems/full-match.svg" compressed="true" preprocess="xml-stripblanks">icons/full-match-24.svg</file>
+
+    <file alias="24x24/emblems/color-match.svg" compressed="true" preprocess="xml-stripblanks">icons/color-match-24.svg</file>
+    <file alias="24x24@2/emblems/color-match.svg" compressed="true" preprocess="xml-stripblanks">icons/color-match-24.svg</file>
   </gresource>
 </gresources>

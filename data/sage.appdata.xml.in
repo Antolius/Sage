@@ -62,10 +62,14 @@
       <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/classic.png</image>
       <caption>Classic game in progress, showcasing the default style</caption>
     </screenshot>
-      <screenshot>
-        <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/advanced.png</image>
-        <caption>Advanced game with an active help tour showcasing the dark style</caption>
-      </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/advanced.png</image>
+      <caption>Advanced game with an active help tour showcasing the dark style</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/antolius/sage/1.0.2/data/screenshots/color_blind.png</image>
+      <caption>Color blind mode, showcasing numbered pins and hint icons</caption>
+    </screenshot>
   </screenshots>
 
   <content_rating type="oars-1.1"/>
