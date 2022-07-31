@@ -52,8 +52,8 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
         update_hint_icons ();
         game.notify["hints"].connect (update_hint_icons);
-        game.notify["help-tour-step"].connect (update_help_popover);
         game.notify["color-blind-mode"].connect (update_hint_icons);
+        game.notify["help-tour-step"].connect (update_help_popover);
     }
 
     private void update_hint_icons () {
@@ -66,12 +66,13 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
             } else {
                 mark_as_a_miss (icons[i]);
             }
+            icons[i].pixel_size = 22;
         }
     }
 
     private void mark_as_correct_position (Gtk.Image icon) {
         if (game.color_blind_mode) {
-            icon.gicon = new ThemedIcon ("emblem-default");
+            icon.gicon = new ThemedIcon ("full-match");
         } else {
             icon.gicon = new ThemedIcon ("emblem-enabled");
         }
@@ -80,7 +81,7 @@ public class Sage.Widgets.HintsGrid : Gtk.Grid {
 
     private void mark_as_correct_color (Gtk.Image icon) {
         if (game.color_blind_mode) {
-            icon.gicon = new ThemedIcon ("dialog-question");
+            icon.gicon = new ThemedIcon ("color-match");
         } else {
             icon.gicon = new ThemedIcon ("emblem-mixed");
         }

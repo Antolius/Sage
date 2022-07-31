@@ -20,23 +20,29 @@
 
 public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
 
-    public EndGameDialog () {
+    public EndGameDialog (bool color_blind_mode) {
         base.with_image_from_icon_name (
             _("Victory"),
             _("Congratulations, you've cracked the code."),
             "face-cool",
             Gtk.ButtonsType.NONE
         );
+
+        this.color_blind_mode = color_blind_mode;
     }
 
-    public EndGameDialog.defeat () {
+    public EndGameDialog.defeat (bool color_blind_mode) {
         base.with_image_from_icon_name (
             _("Defeat"),
             _("You failed to cracked the code."),
             "face-angry",
             Gtk.ButtonsType.NONE
         );
+        
+        this.color_blind_mode = color_blind_mode;
     }
+
+    private bool color_blind_mode;
 
     construct {
         modal = true;
@@ -69,8 +75,13 @@ public class Sage.Widgets.EndGameDialog : Granite.MessageDialog {
                 sensitive = false,
             };
 
+            if (color_blind_mode) {
+                btn.label = "%d".printf (code[i] + 1);
+            }
+
             btn.add_css_class (Granite.STYLE_CLASS_CIRCULAR);
             btn.add_css_class (Colors.STYLE_CLASS[code[i]]);
+            btn.add_css_class ("guess");
             row.attach (btn, i, 0);
         }
 

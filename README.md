@@ -8,9 +8,9 @@ A code breaking game made for [elementary OS](https://elementary.io/).
 [![Build](https://github.com/Antolius/Sage/actions/workflows/ci.yml/badge.svg)](https://github.com/Antolius/Sage/actions)
 [![GitHub release](https://img.shields.io/github/v/release/Antolius/Sage)](https://github.com/Antolius/Sage/releases)
 
-|![Default style screenshot](data/screenshots/classic.png)|![Dark style screenshot](data/screenshots/advanced.png)          |
-|---------------------------------------------------------|-----------------------------------------------------------------|
-| Classic game in progress, showcasing the default style  | Advanced game with an active help tour showcasing the dark style |
+|![Default style screenshot](data/screenshots/color_blind.png)             |![Dark style screenshot](data/screenshots/advanced.png)            |
+|--------------------------------------------------------------------------|-------------------------------------------------------------------|
+| Classic game with color blind mode enabled, showcasing the default style | Advanced game with an active help tour, showcasing the dark style |
 
 ## What's up with that name?
 
