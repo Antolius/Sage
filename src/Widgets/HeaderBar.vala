@@ -28,7 +28,8 @@ public class Sage.Widgets.HeaderBar : Gtk.Widget {
 
     construct {
         layout_manager = new Gtk.BinLayout ();
-        add_css_class ("flat-headerbar");
+        add_css_class ("titlebar");
+        add_css_class ("flat");
 
         var bar = new Gtk.HeaderBar () {
             hexpand = true,
@@ -45,7 +46,9 @@ public class Sage.Widgets.HeaderBar : Gtk.Widget {
     }
 
     private Gtk.Box create_mode_switcher () {
-        var btns = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        var btns = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
+            homogeneous = true
+        };
         btns.add_css_class (Granite.STYLE_CLASS_LINKED);
 
         var classic = new Gtk.ToggleButton.with_label (_("Classic"));
